@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Baz | Cart</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Baz online shop">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/cart.css">
+<link rel="stylesheet" type="text/css" href="/styles/cart_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<% include ./partials/head %>
+	
+	<!-- Cart -->
+	<% if (cart !== undefined) {%>
+	<div class="cart_container">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="cart_title">your shopping cart</div>
+					<small style="font-weight: bold; margin-top: 20px;">All orders are shipped within 3-5 working days</small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="cart_bar d-flex flex-row align-items-center justify-content-start">
+						<div class="cart_bar_title_name">Product</div>
+						<div class="cart_bar_title_content ml-auto">
+							<div class="cart_bar_title_content_inner d-flex flex-row align-items-center justify-content-end">
+								<div class="cart_bar_title_price">Price</div>
+								<div class="cart_bar_title_quantity">Quantity</div>
+								<div class="cart_bar_title_total">Total</div>
+								<div class="cart_bar_title_button"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="cart_products">
+						<ul id="cart_ul">
+							<%cart.products.forEach(function(product) {%>
+								<li class=" cart_product d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-start">
+									<!-- Product Image -->
+									<div class="cart_product_image"><img width="80px" src="<%=product.product.pictures[0]%>" alt=""></div>
+									<!-- Product Name -->
+									<div class="cart_product_name"><a href="/product?id:<%=product.id%>"><%=product.name%> | <%=product.size%></a></div>
+									<div class="cart_product_info ml-auto">
+										
+										<div class="cart_product_info_inner d-flex flex-row align-items-center justify-content-between">
+											<!-- Product Price -->
+											<div class="cart_product_price"><%=product.price%> Naira</div>
+											<!-- Product Quantity -->
+											<input type="number" name="<%=product.id%>" class="text-center product_qty" id="product_qty" value="<%=product.qty%>" data-size="<%=product.size%>" data-id="<%=product.id%>" pattern="[0-9]*" style="border-color: #5f5d5d; padding-top: 5px; padding-bottom: 5px; width: 70px">
+											<!-- Products Total Price -->
+											<div class="cart_product_total"><%=(product.price)*(product.qty)%> Naira</div>
+											<!-- Product Cart Trash Button -->
+											<div id="delete_button" class="cart_product_button" data-id="<%=product.id%>">
+												<button class="cart_product_remove" id="button_remove" data-size="<%=product.size%>" data-id="<%=product.id%>" ><img data-id="<%=product.id%>" class="cart_trash" src="images/trash.png" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</li>
+							<%})%>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="row cart_extra">
+		
+				<!-- Cart Total -->
+				<div class="col-lg-5 offset-lg-3">
+					<div class="cart_total">
+						<div class="cart_title text-center">cart total</div>
+						<ul>
+							<li class="d-flex flex-row align-items-center justify-content-start">
+								<div class="cart_total_title">Total</div>
+								<div class="cart_total_price ml-auto"><%=cart.total_price%> Naira</div>
+							</li>
+						</ul>
+						<button class="cart_total_button" id="to_checkout" onclick="javascript:void(0)">
+								proceed to checkout		
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<div class="cart_control_bar d-flex flex-md-row flex-column align-items-start justify-content-start">
+						<button id="button_clear" class="button_clear cart_button">clear cart</button>
+						<!-- <button id="button_update" class="button_update cart_button">update cart</button> -->
+						<button class="button_update cart_button_2 ml-md-auto" onclick="document.location.href = '/'">continue shopping</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%}%>
+	
+	<% if (cart == undefined) {%>
+		<div class="cart_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div style="line-height: 1em" class="cart_title text-center text-danger">your shopping cart is empty</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<%}%>
+	<!-- Footer -->
+
+	<% include ./partials/footer %>
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/js/cart_custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from jthemes.org/demo-admin/minton/ecommerce-pro-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jul 2019 18:00:31 GMT -->
+<head> 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Admin Baz">
+<meta name="author" content="Admin Baz">
+<!-- Favicon icon -->
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<title>Admin Baz</title>
+<!-- Bootstrap Core CSS -->
+<link href="/plugins/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/plugins/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+<!-- This page CSS -->
+<!-- chartist CSS -->
+<link href="/plugins/vendors/morrisjs/morris.css" rel="stylesheet">
+<!--c3 CSS -->
+<link href="/plugins/vendors/c3-master/c3.min.css" rel="stylesheet">
+<!--Toaster Popup message CSS -->
+<link href="/plugins/vendors/toast-master/css/jquery.toast.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+  <div class="loader">
+    <div class="loader__figure"></div>
+    <p class="loader__label">Admin Baz</p>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container1140px -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Topbar header - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+ 
+
+
+
+
+
+  <% include ./cms/head %>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+      <!-- ============================================================== -->
+      <!-- Container fluid  -->
+      <!-- ============================================================== -->
+      <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Info box -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <!-- Column -->
+          <div class="col-lg-12 col-md-12">
+            <div class="card">
+              <div class="card-body">
+               <div class="d-flex m-b-10 no-block">
+                  <h5 class="card-title m-b-0 align-self-center">Product List</h5>
+                  <div class="ml-auto text-light-blue">
+					<ul class="nav nav-tabs customtab default-customtab list-inline text-uppercase lp-5 font-medium font-12" role="tablist">
+                      <li>
+					  <a href="/cms/add-new" class="btn waves-effect waves-light btn-rounded btn-primary">Add Product</a>
+					  </li>
+						</ul>
+                  </div>
+                </div>
+			    <div class="table-responsive m-t-10">
+                  <table id="myTable" class="table color-table table-bordered product-table table-hover">
+                    <thead>
+                      <tr>
+                         <td>ID</td>
+						 <td>Product</td>
+						 <td>Price</td>
+						 <td>QTY</td>
+			
+						 <td class="op-0">&nbsp;</td>
+                        <td class="op-0">&nbsp;</td>
+						
+						
+                      </tr>
+                    </thead>
+                    <tbody>
+
+					  
+              
+                      <%products.forEach(function(product) {%> 
+                      <tr id="product-tr">
+                          <td><%=product._id%></td>
+                          <td class="text-dark weight-600"><img src="<%=product.pictures[0]%>" alt="" title=""> <%=product.name%> <br></td>
+                        <td><%=product.price%></td>
+                        <td>
+                          <%product.sizes.forEach(function(size) {%> 
+                            <%=size.size%> : <%=size.qty%>
+                            <br>
+                          <%})%>
+                        </td>
+                       
+                        <td class="text-center"><a href="/cms/edit/<%=product._id%>"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td class="text-center product-td" data-id="<%=product._id%>" ><a href="#" data-id="<%=product._id%>"><i data-id="<%=product._id%>" class="fas fa-trash-alt text-danger"></i></a></td>
+                      </tr>
+                      <%})%>
+					  	  
+					  
+				
+                      
+                    </tbody>
+                  </table>
+                </div>
+             
+			   
+              </div>
+            </div>
+          </div>
+           <!-- Column -->
+        </div>
+
+
+
+        <!-- ============================================================== -->
+        <!-- End Info box -->
+        <!-- chart box two -->
+        <!-- ============================================================== -->
+     
+	 </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Page Content -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- End footer -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/plugins/vendors/jquery/jquery.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="/plugins/vendors/bootstrap/js/popper.min.js"></script>
+<script src="/plugins/vendors/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/plugins/vendors/ps/perfect-scrollbar.jquery.min.js"></script>
+<!--Wave Effects -->
+<script src="/assets/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/assets/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/assets/js/custom.min.js"></script>
+<!-- ============================================================== -->
+<!-- This page plugins -->
+<!-- ============================================================== -->
+<!--c3 JavaScript -->
+<script src="/plugins/vendors/d3/d3.min.js"></script>
+<script src="/plugins/vendors/c3-master/c3.min.js"></script>
+<!--jquery knob -->
+<script src="/plugins/vendors/knob/jquery.knob.js"></script>
+<!--Sparkline JavaScript -->
+<script src="/plugins/vendors/sparkline/jquery.sparkline.min.js"></script>
+<!--Morris JavaScript -->
+<script src="/plugins/vendors/raphael/raphael-min.js"></script>
+<script src="plugins/vendors/morrisjs/morris.js"></script>
+<!-- Popup message jquery -->
+<script src="/plugins/vendors/toast-master/js/jquery.toast.js"></script>
+<script src="/plugins/vendors/datatables/jquery.dataTables.min.js"></script>
+
+<script>
+   $(function() {
+       $('#myTable').DataTable();
+           var table = $('#example').DataTable({
+              "columnDefs": [{
+                  "visible": false,
+                  "targets": 2
+            }],
+            "order": [
+                  [2, 'asc']
+            ],
+            "displayLength": 18,
+             "drawCallback": function(settings) {
+                var api = this.api();
+                 var rows = api.rows({
+                     page: 'current'
+                 }).nodes();
+                var last = null;
+             api.column(2, {
+                        page: 'current'
+                    }).data().each(function(group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                            last = group;
+                        }
+                    });
+                }
+            });
+            // Order by the grouping
+            $('#example tbody').on('click', 'tr.group', function() {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                } else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+        
+    });
+    $('#example23').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+
+
+    // delete product
+
+    $('.product-td').on('click', function(e) {
+      
+      
+		if(e.target.classList.contains('fa-trash-alt')) {
+			var id = e.target.getAttribute('data-id');
+			console.log('clicked', id);
+			fetch(`/cms/product/${id}`, {
+				method: 'DELETE'
+      })
+      .then((res) => res.json())
+			.then((dt) =>{
+        window.alert(dt.msg)
+        window.location.reload()
+			})
+			.catch((err) =>{
+        window.alert(err.msg)
+      })
+			
+		}
+	});
+</script>
+
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="/plugins/vendors/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+<!-- Mirrored from jthemes.org/demo-admin/minton/ecommerce-pro-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jul 2019 18:00:31 GMT -->
+</html>

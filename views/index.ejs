@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Baz</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Baz online shop">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
+<link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="/styles/responsive.css">
+<link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<% include ./partials/head %>
+	<!-- Home -->
+	<!-- <img src="images/baz.jpg" alt="loading..." width="100%" height="50%"> -->
+	<!-- <div style="background-color: rgb(240, 164, 0); display: flex; flex-direction: row; justify-content: center; align-items: center; width: 100%; height: 100vh;">
+
+		<h1 style="font-family: 'Black Ops One', cursive; font-size: 120px; color: #000000;">BAZ</h1>
+
+	</div> -->
+
+
+	<!-- New Arrivals -->
+
+	<div class="arrivals">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title_container text-center">
+						<!-- <div class="section_subtitle">only the best</div> -->
+						<div class="section_title">Ready To Wear</div>
+					</div>
+				</div>
+			</div>
+			<div id="products_container" class="row products_container">
+				<%clothings.forEach(function(product) {%>
+						<!-- Product -->
+					<div class="col-lg-4 product_col">
+						<div class="product">
+							<div class="product_image">
+									<a href="/product?id=<%=product.id %>">
+										<img src="<%=product.pictures[0] %>" alt="NOT FOUND">
+									</a>
+								
+							</div>
+				
+							<div class="product_content clearfix">
+								<div class="product_info">
+									<div class="product_name"><a href="/product?id=<%=product.id %>"><%=product.name %></a></div>
+
+									<div class="product_price">
+										<%if (product.sizes.reduce((prev, curr) => prev + curr.qty, 0) <= 0) {%>
+											SOLD OUT
+										<%} else {%> 
+											&#8358; <%=product.price %>
+										<%}%>
+									</div>
+								</div>
+								
+								
+								<div data-id="<%=product.id%>" class="product_options cart">
+										<div class="product_buy product_option cart" data-price="<%=product.price%>" data-imgs="<%=JSON.stringify(product.pictures)%>" data-name="<%=product.name%>" data-id="<%=product.id%>"><img class="cart" data-imgs="<%=JSON.stringify(product.pictures)%>" data-price="<%=product.price%>" data-id="<%=product.id%>" data-name="<%=product.name%>" src="images/shopping-bag-white.svg" alt=""></div>
+										
+								</div>
+
+								<select name="select" style="color:white; padding: 7px" class="product_options product_buy select" id="select">
+									<%product.sizes.forEach(function(size) {%>
+										<%if(size.qty > 0){%>
+										<option data-size="<%=size.size%>" class="cart_option" value="<%=size.size%>"><%=size.size%></option>
+										<%}%>
+									<%})%>
+								</select>
+							
+							</div>
+							
+						</div>
+					</div>
+				<%})%>
+		
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<% include ./partials/footer %>
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="/js/custom.js"></script>
+<!-- <script>
+	function checkCookie(){
+		var cookieEnabled = navigator.cookieEnabled;
+		document.cookie = "testcookie";
+		if (!cookieEnabled){ 
+			document.cookie = "testcookie";
+			cookieEnabled = document.cookie.indexOf("testcookie")!=-1;
+		}
+		return cookieEnabled || showCookieFail();
+	}
+
+	function showCookieFail(){
+	// do something here
+		alert('COOKIES NOT ENABLED')
+	}
+
+
+	// within a window load,dom ready or something like that place your:
+	checkCookie();
+</script> -->
+</body>
+</html>

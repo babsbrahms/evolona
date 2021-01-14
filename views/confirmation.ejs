@@ -1,0 +1,118 @@
+  
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Baz</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Baz online shop">
+<meta name="csrf-token" content="<%=csrfToken%>">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/checkout.css">
+<link rel="stylesheet" type="text/css" href="/styles/checkout_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+  <% include ./partials/head %>
+  
+  
+    <h1>Proccessing...</h1>
+    <div id="alert" class="alert alert-danger col text-center mt-5"></div>
+	<!-- Footer -->
+    <input type="hidden" id="cart" value="<%=JSON.stringify(cart)%>">
+    <input type="hidden" id="txref" value="<%=txref%>">
+	<% include ./partials/footer %>
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+
+<script>
+         var alert = document.getElementById('alert')
+	  	//remove alert
+		alert.style.display = 'none';
+		
+        // get for data
+        var userData = JSON.parse(window.localStorage.getItem('userObj'));
+		
+		var first = userData.first || '';
+		var last = userData.last  || '';
+		var email = userData.email  || '';
+		var country = userData.country  || '';
+		var state = userData.state  || '';
+		var city =  userData.city  || '';
+		var address =  userData.address  || '';
+		var phone = userData.phone  || '';
+		var amount =  userData.amount;
+		var shipping = userData.shipping;
+        var cart = document.getElementById('cart').value
+        var txref = document.getElementById('txref').value;
+        var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        
+		if (first && last && email && country && state && city && address && phone) {
+              
+                alert.classList.remove('alert-danger');
+                alert.classList.add('alert-success');
+                alert.innerHTML = 'Verify your payment and saving your order. Please wait...';
+                // redirect to a success page
+                fetch('/checkout/order', {
+                    credentials: 'include',
+                    // credentials: 'same-origin', // <-- includes cookies in the request
+                    headers: {
+                        "Content-Type": 'application/json',
+                        'CSRF-Token': token // <-- is the csrf token as a header
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        txref,
+                        name: `${first} ${last}`,
+                        email,
+                        address,
+                        state,
+                        city,
+                        country,
+                        phone,
+                        shipping,
+                        cart: JSON.parse(cart)
+                    })
+                })
+                .then((res) => res.json())
+                .then((dt) =>{
+                //	window.location.reload()
+                    alert.style.display = 'block';
+                    alert.classList.remove('alert-danger');
+                    alert.classList.add('alert-success');
+                    alert.innerHTML = dt.msg;
+                })
+                .catch((err) =>{
+                    alert.style.display = 'block';
+                    alert.classList.remove('alert-success');
+                    alert.classList.add('alert-dander');
+                    alert.innerHTML = err.msg
+                })
+   
+
+		} else {
+			alert.style.display = 'block';
+			alert.innerHTML = 'Complete billing details to order product'
+			// window.alert('Complete billing details to order product')
+		}
+
+
+
+</script>
+</body>
+</html>

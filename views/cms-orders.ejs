@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from jthemes.org/demo-admin/minton/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jul 2019 18:00:31 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Admin Baz">
+<meta name="author" content="Admin Baz">
+<!-- Favicon icon -->
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<title>Admin Baz</title>
+<!-- Bootstrap Core CSS -->
+<link href="/plugins/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/plugins/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+<!-- This page CSS -->
+<!-- Page CSS -->
+<link href="/plugins/vendors/bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet" type="text/css">
+<!-- Custom CSS -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+  <div class="loader">
+    <div class="loader__figure"></div>
+    <p class="loader__label">Admin Baz</p>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container1140px -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Topbar header - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+  <% include ./cms/head %>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+      <!-- ============================================================== -->
+      <!-- Container fluid  -->
+      <!-- ============================================================== -->
+      <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Info box -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <!-- Column -->
+          <div class="col-lg-12 col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex m-b-10 no-block">
+                  <h5 class="card-title m-b-0 align-self-center">Orders</h5>
+                </div>
+                <div class="table-responsive m-t-10">
+                  <table id="myTable" class="table table-orders color-table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td><div class="checkbox checkbox-primary">
+                            <input id="checkbox0"  onchange="checkAll(this)" name="chk[]" type="checkbox">
+                            <label for="checkbox0"></label>
+                          </div></td>
+                        <td>transactionRef</td>
+                        <td>Customer</td>
+                    
+                        <td>Total Price</td>
+                        <td>State</td>
+                        <td>Date</td>
+                        <td>Status</td>
+                  
+                        <td class="op-0">&nbsp;</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%orders.forEach(function(order) {%> 
+                      <tr>
+                        <td><div class="checkbox checkbox-primary">
+                            <input id="checkbox1" type="checkbox">
+                            <label for="checkbox1"></label>
+                          </div>
+                        <td><%=order.transactionRef%></td>
+                        <td class="text-dark weight-600"><a href="/cms/order-page/<%=order._id%>"><%=order.name%></a> </td>
+                        <td><%=order.totalPrice%></td>
+                        <td><%=order.address.state%></td>
+                        <td><%=new Date(order.date).toLocaleString()%></td>
+                        <td class="product-status">
+                          <select class="select" name="" data-id="<%=order._id%>">
+                            <option value="<%=order.status%>"><%=order.status%></option>
+                            <%if(order.status !== 'ordered') {%><option value="ordered">ordered</option><%}%>
+                            
+                            <%if(order.status !== "recieved") {%><option value="recieved">recieved</option><%}%>
+                            
+                            <%if(order.status !== "sent") {%><option value="sent">sent</option><%}%>
+                            
+                            <%if(order.status !== "cancel") {%><option value="cancel">cancel</option><%}%>
+                            
+                          </select>
+                        </td>
+                        <td class="text-center product-td"><a href="#"><i  data-id="<%=order._id%>" class="fas fa-trash-alt text-danger"></i></a></td>
+                      </tr>
+                      <%})%>
+                  
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Info box -->
+        <!-- chart box two -->
+        <!-- ============================================================== -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/plugins/vendors/jquery/jquery.min.js"></script>
+<!-- Bootstrap popper Core JavaScript -->
+<script src="/plugins/vendors/bootstrap/js/popper.min.js"></script>
+<script src="/plugins/vendors/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/plugins/vendors/ps/perfect-scrollbar.jquery.min.js"></script>
+<!--Wave Effects -->
+<script src="/assets/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/assets/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/assets/js/custom.min.js"></script>
+<!-- ============================================================== -->
+<!-- This page plugins -->
+<!-- ============================================================== -->
+<!--c3 JavaScript -->
+<script src="/plugins/vendors/d3/d3.min.js"></script>
+<script src="/plugins/vendors/c3-master/c3.min.js"></script>
+<!--jquery knob -->
+<script src="/plugins/vendors/knob/jquery.knob.js"></script>
+<!--Sparkline JavaScript -->
+<script src="/plugins/vendors/sparkline/jquery.sparkline.min.js"></script>
+<!--Morris JavaScript -->
+<script src="/plugins/vendors/raphael/raphael-min.js"></script>
+<script src="/plugins/vendors/morrisjs/morris.js"></script>
+<!-- Popup message jquery -->
+<script src="/plugins/vendors/toast-master/js/jquery.toast.js"></script>
+<script src="/plugins/vendors/datatables/jquery.dataTables.min.js"></script>
+<script>
+  
+   $(function() {
+       $('#myTable').DataTable();
+           var table = $('#example').DataTable({
+              "columnDefs": [{
+                  "visible": false,
+                  "targets": 2
+            }],
+            "order": [
+                  [2, 'asc']
+            ],
+            "displayLength": 18,
+             "drawCallback": function(settings) {
+                var api = this.api();
+                 var rows = api.rows({
+                     page: 'current'
+                 }).nodes();
+                var last = null;
+             api.column(2, {
+                        page: 'current'
+                    }).data().each(function(group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                            last = group;
+                        }
+                    });
+                }
+            });
+            // Order by the grouping
+            $('#example tbody').on('click', 'tr.group', function() {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                } else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+        
+    });
+    $('#example23').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+</script>
+<script>
+ function checkAll(ele) {
+     var checkboxes = document.getElementsByTagName('input');
+     if (ele.checked) {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             console.log(i)
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+     }
+ }
+
+
+ // change order status
+
+ $('.product-status').on('change', function(e) {
+      
+      if(e.target.classList.contains('select')) {
+        var id = e.target.getAttribute('data-id');
+        var status = e.target.value
+        
+        fetch(`/cms/order/status`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'Application/Json'},
+					body: JSON.stringify({
+            _id: id,
+            status
+					})
+        })
+        .then((res) => res.json())
+				.then((dt) =>{
+					console.log(dt);
+					
+					window.location.reload()
+				})
+				.catch((err) => window.alert(err.msg))
+
+        
+      }
+    });
+
+
+    // delete orde
+    
+    $('.product-td').on('click', function(e) {
+      
+      
+      if(e.target.classList.contains('fa-trash-alt')) {
+        var id = e.target.getAttribute('data-id');
+        console.log('clicked', id);
+        fetch(`/cms/order_remove/${id}`, {
+          method: 'DELETE'
+        })
+        .then((res) => res.json())
+        .then((dt) =>{
+          window.alert(dt.msg)
+          window.location.reload()
+        })
+        .catch((err) =>{
+          window.alert(err.msg)
+        })
+        
+      }
+    });
+</script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="/plugins/vendors/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+<!-- Mirrored from jthemes.org/demo-admin/minton/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jul 2019 18:00:31 GMT -->
+</html>

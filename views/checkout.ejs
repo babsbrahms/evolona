@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Baz | Checkout</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Baz online shop">
+<meta name="csrf-token" content="<%=csrfToken%>">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/checkout.css">
+<link rel="stylesheet" type="text/css" href="/styles/checkout_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+	<% include ./partials/head %>
+
+
+	<!-- Checkout -->
+	<% if (cart !== undefined) {%>
+
+		<% if (cart.total_price <= 0) {%>
+			<div class="cart_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div style="line-height: 1em" class="checkout_title text-center text-danger">your shopping cart is empty</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<%}%>
+
+		<% if (cart.total_price > 0) {%>
+		<div class="checkout">
+			<div class="container">
+				<div class="row">
+
+					<!-- Billing Details -->
+					<div class="col-lg-6">
+						<div class="billing">
+							<div class="checkout_title">billing details</div>
+							<div class="checkout_form_container">
+								<form action="#" id="checkout_form">
+									<div class="d-flex flex-lg-row flex-column align-items-start justify-content-between">
+										<input type="text" name='first_name' class="checkout_input checkout_input_50" placeholder="First Name" required="required">
+										<input type="text" name='last_name' class="checkout_input checkout_input_50" placeholder="Last Name" required="required">
+									</div>
+									<input type="text" name="email" class="checkout_input" placeholder="E-mail" required="required">
+									<select name="country" id="country" class="country_select checkout_input">
+										<option>Nigeria</option>
+									</select>
+									<select name="state" id="state" class="country_select checkout_input">
+										<!-- <option value="2500">Abia</option> -->
+										<option value="1500">Abuja</option>
+										<!-- <option value="3500">Adamawa</option> -->
+										<option value="3000">Akwa Ibom</option>
+										<option value="3000">Anambra</option>
+										<!-- <option value="3000">Bauchi</option> -->
+										<option value="3000">Bayelsa</option>
+										<option value="3000">Benue</option>
+										<!-- <option value="3500">Borno</option> -->
+										<option value="3000">Cross River</option>
+										<option value="3000">Delta</option>
+										<option value="3000">Ebonyi</option>
+										<option value="3000">Edo</option>
+										<option value="1500">Ekiti</option>
+										<option value="2500">Enugu</option>
+										<!-- <option value="1500">Gombe</option> -->
+										<option value="3000">Imo</option>
+										<!-- <option value="1500">Jigawa</option> -->
+										<option value="3300">Kaduna</option>
+										<option value="3500">Kano</option>
+										<!-- <option value="1500">Kastina</option> -->
+										<!-- <option value="1500">Kebbi</option> -->
+										<option value="1500">Kogi</option>
+										<option value="0">Kwara</option>
+										<option value="1500">Lagos</option>
+										<option value="2000">Nassarawa</option>
+										<!-- <option value="1500">Niger</option> -->
+										<option value="1500">Ogun</option>
+										<option value="1500">Ondo</option>
+										<option value="1500">Osun</option>
+										<option value="1500">Oyo</option>
+										<option value="3000">River</option>
+										
+										
+									</select>
+									<input type="text" name="city" class="checkout_input" placeholder="city" required="required">
+									<input type="text" name="address" class="checkout_input" placeholder="Address" required="required">
+									<input type="text" name="phone" class="checkout_input" placeholder="Phone No" required="required">
+
+									<input type="hidden" name="_csrf" value="<%=csrfToken%>">
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cart Details -->
+					<div class="col-lg-6">
+						<div class="cart_details">
+							<div class="checkout_title">cart total</div>
+							<div class="cart_total">
+								<ul>
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_total_title">Product</div>
+										<div class="cart_total_price ml-auto">Total</div>
+									</li>
+									<%cart.products.forEach(function(product) {%>
+										<li class="d-flex flex-row align-items-center justify-content-start">
+											<div class="cart_total_title"><%=product.name%> | <%=product.size%> x <%=product.qty%></div>
+											<div class="cart_total_price ml-auto"><%=(product.price)*(product.qty)%> Naira</div>
+										</li>
+									<%})%>
+									
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_total_title">Subtotal</div>
+										<div class="cart_total_price ml-auto"><%=cart.total_price%> Naira</div>
+										<input type="hidden" id="hidde_total_price" name="hidde_total_price" value="<%=cart.total_price%>">
+									</li>
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_total_title">Shipping</div>
+										<div id="shipping" class="cart_total_price ml-auto"> 0 Naira</div>
+									</li>
+									<li class="d-flex flex-row align-items-start justify-content-start total_row">
+										<div class="cart_total_title">Total</div>
+										<div id="total_price" class="cart_total_price ml-auto"><%=(cart.total_price) + 2000%> Naira</div>
+									</li>
+								</ul>
+							</div>
+							<div id="alert" class="alert alert-danger col text-center mt-5"></div>
+
+							<div class="payment_options">
+									<form>
+										<!-- <script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script> -->
+										<script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+										<button type="button" data_cart="<%=JSON.stringify(cart)%>" id="payWithRave" onClick="payWithRave()" class="cart_total_button" >Place order</button>
+									</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%}%>
+		<%}%>
+
+		<% if (cart == undefined) {%>
+			<div class="cart_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div style="line-height: 1em" class="checkout_title text-center text-danger">your shopping cart is empty</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<%}%>
+	</div>
+
+	<!-- Footer -->
+
+	<% include ./partials/footer %>
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/js/checkout_custom.js"></script>
+</body>
+</html>

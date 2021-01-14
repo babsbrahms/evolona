@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from jthemes.org/demo-admin/minton/ecommerce-order-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jul 2019 18:08:45 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Admin Baz">
+<meta name="author" content="Admin Baz">
+<!-- Favicon icon -->
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<title>Admin Baz</title>
+<!-- Bootstrap Core CSS -->
+<link href="/plugins/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/plugins/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+<!-- This page CSS -->
+<!-- Page CSS -->
+<link href="/plugins/vendors/bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/pages/order-page.css" rel="stylesheet" type="text/css">
+
+<!-- Custom CSS -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+<!-- ============================================================== --> 
+<!-- Preloader - style you can find in spinners.css --> 
+<!-- ============================================================== -->
+<div class="preloader">
+  <div class="loader">
+    <div class="loader__figure"></div>
+    <p class="loader__label">Admin Mintone</p>
+  </div>
+</div>
+<!-- ============================================================== --> 
+<!-- Main wrapper - style you can find in pages.scss --> 
+<!-- ============================================================== -->
+<div id="main-wrapper"> 
+  <!-- ============================================================== --> 
+  <!-- Container1140px --> 
+  <!-- ============================================================== --> 
+  <!-- ============================================================== --> 
+  <!-- Topbar header - style you can find in pages.scss --> 
+  <!-- ============================================================== -->
+  <% include ./cms/head %>
+    <!-- ============================================================== --> 
+    <!-- End Left Sidebar - style you can find in sidebar.scss  --> 
+    <!-- ============================================================== --> 
+    <!-- ============================================================== --> 
+    <!-- Page wrapper  --> 
+    <!-- ============================================================== -->
+    <div class="page-wrapper"> 
+      <!-- ============================================================== --> 
+      <!-- Container fluid  --> 
+      <!-- ============================================================== -->
+      <div class="container-fluid"> 
+	  <!-- ============================================================== --> 
+        <!-- Breadcrumbs box --> 
+        <!-- ============================================================== -->
+	  <nav class="breadcrumb">
+                                      <span class="breadcrumb-item text-dark">Ecommerce</span>
+                                    <a class="breadcrumb-item text-dark" href="/cms/orders">Orders</a>
+                                    <a class="breadcrumb-item text-primary">Orders Page</a>
+                                    
+                                </nav>
+	  <!-- ============================================================== --> 
+        <!-- End Breadcrumbs box --> 
+        <!-- ============================================================== -->
+        <!-- ============================================================== --> 
+        
+		 <!--Delivery details --> 
+        <!-- ============================================================== -->
+        <div class="row"> 
+          <!-- Column -->
+          <div class="col-lg-8 col-md-12">
+            <div class="card">
+              <div class="card-body">
+             <div class="d-flex m-b-10 no-block">
+                  <h5 class="card-title m-b-0 align-self-center text-uppercase"> Transaction Ref: <%=order.transactionRef%></h5>
+                  <div class="ml-auto">
+                    <ul class="list-inline m-t-5 text-muted text-uppercase lp-5 font-medium font-12">
+                      <li>19.07.2018, 12:15</li>
+                      
+                    </ul>
+                  </div>
+                </div>
+				
+				<div class="table-responsive">
+                        <table class="table product-table color-table primary-table">
+                          <thead>
+                            <tr>
+                              <th>ID </th>
+                              <th>Product</th>
+							  <th>&nbsp;</th>
+                              <th>Price</th>
+                              <th>QTY</th>
+							   <th>Total</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <%order.cart.products.forEach(function(cart) {%>
+                            <tr>
+                              <td><%=cart.id%></td>
+                              <td><img src="<%=cart.product.pictures[0]%>" alt="" title=""> </td>
+							                <td class="text-dark weight-600">
+							                  <%=cart.name%> | <%=cart.size%>
+                              </td>
+                              <td>NGN <%=cart.price%></td>
+                              <td><%=cart.qty%></td>
+                              <td>NGN <%=(cart.price) * (cart.qty)%></td>
+                              
+                            </tr>
+                            <%})%>
+                           
+							  <td colspan="2" class="custom-product">&nbsp;</td>
+							  
+							  <td colspan="3" class="text-muted custom-product">Subtotal Price:
+                          </td>
+                              <td class="custom-product">NGN <%=order.cart.total_price%></td>
+                              
+                            </tr>
+							
+							   <tr>  
+							  <td class="no-border" colspan="2">&nbsp;</td>
+							  
+							  <td colspan="3" class="text-muted no-border">Shipping:
+                          </td>
+                              <td class="no-border">NGN <%=order.shipping%></td>
+                              
+                            </tr>
+							
+							   <!-- <tr>  
+							 <td class="no-border" colspan="2">&nbsp;</td>
+							 <td colspan="3" class="text-muted no-border">Delivery (American Express):
+                          </td>
+                              <td class="no-border">$39</td>
+                              
+                            </tr> -->
+							
+							<tr>  
+							  <td class="no-border" colspan="2">&nbsp;</td>
+							  <td colspan="3" class="text-dark no-border weight-600">Total Price:
+                          </td>
+                              <td class="no-border">NGN <%=order.totalPrice%></td>
+                              
+                            </tr>
+							
+                          </tbody>
+                        </table>
+                      </div>
+			  
+			 </div>
+            </div>
+          </div>
+		  
+		  <div class="col-lg-4 col-md-12">
+            <div class="card">
+              <div class="card-body">
+              <h5 class="card-title m-b-5 align-self-center text-uppercase">Customer Details</h5>
+			  
+			  
+			    <div class="product-table text-dark no-border">
+                  <table class="table m-b-5 m-t-20 ">
+                    <tbody>
+                      <tr>
+                       <td class="text-muted">Customer: </td>
+                        <td class="text-color"><%=order.name%></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Email: </td>
+                        <td class="text-color"><%=order.email%></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Phone: </td>
+                        <td class="text-color"><%=order.phone%></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Address: </td>
+                        <td class="text-color"> <%=order.address.address%>. <%=order.address.city%>, <%=order.address.state%>, <%=order.address.country%></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              
+				
+			 </div>
+            </div>
+          
+		    <div class="card">
+              <div class="card-body">
+              <h5 class="card-title m-b-5 align-self-center text-uppercase">Shipping Address</h5>
+			  
+			  
+			    <div class="product-table text-dark no-border">
+                  <table class="table m-b-5 m-t-20 ">
+                    <tbody>
+                      <tr>
+                       <td  class="text-muted">Recipient: </td>
+                        <td  class="text-color"><%=order.name%></td>
+                      </tr> <tr>
+                        <td class="text-muted">Phone: </td>
+                        <td class="text-color"><%=order.phone%></td>
+                      </tr> <tr>
+                        <td class="text-muted">Address: </td>
+                        <td class="text-color"><%=order.address.address%>. <%=order.address.city%>, <%=order.address.state%>, <%=order.address.country%></td>
+                      </tr>
+                     
+                     
+                    </tbody>
+                  </table>
+                </div>
+              
+				
+			 </div>
+            </div>
+          
+		  </div>
+          <!-- Column --> 
+        </div>
+        <!-- ============================================================== --> 
+        <!-- End Delivery details --> 
+        
+        
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== --> 
+  <!-- End Page Content --> 
+  <!-- ============================================================== --> 
+  <!-- ============================================================== --> 
+  <!-- End Container fluid  --> 
+  <!-- ============================================================== --> 
+  <!-- ============================================================== --> 
+  <!-- footer --> 
+  <!-- ============================================================== --> 
+  <!-- ============================================================== --> 
+  <!-- End footer --> 
+  <!-- ============================================================== --> 
+</div>
+<!-- ============================================================== --> 
+<!-- End Page wrapper  --> 
+<!-- ============================================================== -->
+<!-- ============================================================== --> 
+<!-- End Wrapper --> 
+<!-- ============================================================== --> 
+<!-- All Jquery --> 
+<!-- ============================================================== --> 
+<script src="/plugins/vendors/jquery/jquery.min.js"></script> 
+<!-- Bootstrap popper Core JavaScript --> 
+<script src="/plugins/vendors/bootstrap/js/popper.min.js"></script> 
+<script src="/plugins/vendors/bootstrap/js/bootstrap.min.js"></script> 
+<!-- slimscrollbar scrollbar JavaScript --> 
+<script src="/plugins/vendors/ps/perfect-scrollbar.jquery.min.js"></script> 
+<!--Wave Effects --> 
+<script src="/assets/js/waves.js"></script> 
+<!--Menu sidebar --> 
+<script src="/assets/js/sidebarmenu.js"></script> 
+<!--Custom JavaScript --> 
+<script src="/assets/js/custom.min.js"></script> 
+<!-- ============================================================== --> 
+<!-- This page plugins --> 
+<!-- ============================================================== --> 
+<!--c3 JavaScript --> 
+<script src="/plugins/vendors/d3/d3.min.js"></script> 
+<script src="/plugins/vendors/c3-master/c3.min.js"></script> 
+<!--jquery knob --> 
+<script src="/plugins/vendors/knob/jquery.knob.js"></script> 
+<!--Sparkline JavaScript --> 
+<script src="/plugins/vendors/sparkline/jquery.sparkline.min.js"></script> 
+<!--Morris JavaScript --> 
+<script src="/plugins/vendors/raphael/raphael-min.js"></script> 
+<script src="/plugins/vendors/morrisjs/morris.js"></script> 
+<!-- Popup message jquery --> 
+<script src="/plugins/vendors/toast-master/js/jquery.toast.js"></script> 
+<script src="/plugins/vendors/datatables/jquery.dataTables.min.js"></script> 
+<script>
+   $(function() {
+       $('#myTable').DataTable();
+           var table = $('#example').DataTable({
+              "columnDefs": [{
+                  "visible": false,
+                  "targets": 2
+            }],
+            "order": [
+                  [2, 'asc']
+            ],
+            "displayLength": 18,
+             "drawCallback": function(settings) {
+                var api = this.api();
+                 var rows = api.rows({
+                     page: 'current'
+                 }).nodes();
+                var last = null;
+             api.column(2, {
+                        page: 'current'
+                    }).data().each(function(group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                            last = group;
+                        }
+                    });
+                }
+            });
+            // Order by the grouping
+            $('#example tbody').on('click', 'tr.group', function() {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                } else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+        
+    });
+    $('#example23').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+</script> 
+<script>
+ function checkAll(ele) {
+     var checkboxes = document.getElementsByTagName('input');
+     if (ele.checked) {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             console.log(i)
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+     }
+ }
+</script> 
+
+<!-- ============================================================== --> 
+<!-- Style switcher --> 
+<!-- ============================================================== --> 
+<script src="/plugins/vendors/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+<!-- Mirrored from jthemes.org/demo-admin/minton/ecommerce-order-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jul 2019 18:08:46 GMT -->
+</html>

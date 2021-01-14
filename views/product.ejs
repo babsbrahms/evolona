@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Product</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Baz online shop">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/product.css">
+<link rel="stylesheet" type="text/css" href="/styles/product_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<% include ./partials/head %>
+
+	<!-- Product -->
+
+	<div class="product">
+		<div class="container">
+
+			<div class="row product_row">
+
+				<!-- Product Image -->
+				<div class="col-lg-7">
+					<div class="product_image">
+						<div class="product_image_large"><img src="<%=product.pictures[0]%>" alt=""></div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start">
+								<%product.pictures.forEach(function(image, index) {%>
+									<div class="product_image_thumbnail" style="background-image:url(<%=image%>)" data-image="<%=image%>"></div>	
+								<%})%>
+						</div>
+					</div>
+				</div>
+
+				<!-- Product Content -->
+				<div class="col-lg-5">
+					<div class="product_content">
+						<div class="product_name"><%=product.name%></div>
+						<div class="product_price"><%=product.price%> Naira</div>
+						<!-- product description -->
+						<div class="product_text">
+							<p><%=product.description%></p>
+						</div>
+						<!-- Product Quantity -->
+						<div class="product_quantity_container">
+							<span>Quantity</span>
+							<div class="product_quantity clearfix">
+								<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+								<div class="quantity_buttons">
+									<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-caret-up" aria-hidden="true"></i></div>
+									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Product Size -->
+						<div class="product_size_container">
+							<span>Size</span>
+							<div class="product_size">
+								<ul id="size_ul" class="d-flex flex-row align-items-start justify-content-start">
+									<%product.sizes.forEach(function(size, index) {%>
+										<%if(size.qty > 0){%>
+										<li>
+											<input type="radio" value="<%=size.size%>" id="radio_<%=(index+ 1)%>" name="product_radio" class="regular_radio radio_<%=(index+ 1)%>">
+											<label for="radio_<%=(index+ 1)%>"><%=size.size%></label>
+										</li>
+										<%}%>
+									<%})%>
+								</ul>
+							</div>
+							<!-- In Stock -->
+							<div class="in_stock_container">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<%product.sizes.forEach(function(size, index) {%>
+										<%if(size.qty <= 0){%>
+										<li>
+											<label style="color: red;">Size <%=size.size%> is out of stock </label>
+											<br>
+										</li>
+										<%}%>
+									<%})%>
+								</ul>
+							</div>
+
+							<div id="alert" class="alert alert-danger col-lg-5 col-md-6 text-center">
+								add your size
+							</div>
+							<input type="hidden" name="id" id="product_id" data-imgs="<%=JSON.stringify(product.pictures)%>" data-price="<%=product.price%>" data-name="<%=product.name%>" value="<%=product.id%>">
+							<div class="button cart_button"><a href="javascript:void(0)">add to cart</a></div>
+						</div>	
+
+						<br><br>
+
+						<!-- product tags -->
+						<%if (product.tags.length > 0) {%>
+							<%product.tags.forEach(function(tag) {%>
+						
+								<a style="background-color:bisque; padding: 5px; border-radius: 3px;"><%=tag%></a>
+							
+							<%})%>
+						<%}%>
+
+					</div>
+				</div>
+			</div>
+
+
+			<img width="100%" height="auto" src="images/size-guide.png" alt="">
+			<br>
+			<hr>
+	<!-- Footer -->
+	<% include ./partials/footer %>
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/js/product_custom.js"></script>
+</body>
+</html>

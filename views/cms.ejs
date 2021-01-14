@@ -1,0 +1,121 @@
+  
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Baz | cms</title>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Baz online shop">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/checkout.css">
+<link rel="stylesheet" type="text/css" href="/styles/checkout_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+  <% include ./partials/head %>
+  
+  <div class="container">
+    <div class="row">
+
+        <!-- Billing Details -->
+        <div class="col-lg-6 offset-lg-3">
+            <div class="billing">
+                <div class="checkout_title">SIGN-IN</div>
+                <div class="checkout_form_container">
+                    <div id="cms_form" >
+
+                        <input type="text" id="email" name="email" class="checkout_input" placeholder="E-mail" required="required">
+
+                        <input type="password" id="password" name="password" class="checkout_input" placeholder="Password" required="required">
+                        <div id="spiner_div" style="display: flex; flex-direction:row; justify-content:center; align-items: center; flex: 1;">
+                            <div style="font-size: 30px;" class="fa fa-spinner fa-spin"></div>
+                        </div>
+                        
+                        <div id="alert" class="alert alert-danger text-center mt-5"></div>
+                       
+                        <div class="payment_options">
+                            <button type="submit" id="sign_in" class="cart_total_button" >SIGN IN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+  <% include ./partials/footer %>
+
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+<script src="/js/firebase.js"></script>
+
+<script>
+
+    var alert = document.getElementById('alert');
+    var spinner = document.querySelector('div#spiner_div')
+
+    alert.style.display = 'none'
+    spinner.style.display = 'none';
+
+
+    document.getElementById('sign_in').addEventListener('click', function() {
+      var email = document.getElementById('email').value;
+      var password =  document.getElementById('password').value;
+      alert.style.display = 'none'
+      spinner.style.display = 'block';
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        
+            fetch('/cms/sign_in', {
+              method: 'POST',
+              credentials: 'include',
+              headers: {"Content-Type": 'application/json'},
+              body: JSON.stringify({
+                token: user.user.uid
+              })
+            })
+            // .then((res) => res.json())
+            .then(() => {
+              console.log('TO PRODUCT LIST');
+              
+              window.location.href = '/cms/product-list';
+            }).catch(err => {
+              console.log(err.msg);
+              
+              alert.style.display = 'block'
+              alert.innerHTML = 'Unable to sign-in';
+              spinner.style.display = 'none';
+            })
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        alert.style.display = 'block'
+        alert.innerHTML = error.message;
+        spinner.style.display = 'none';
+        // ...
+      });
+
+    })
+  </script>
+</body>
+</html>
