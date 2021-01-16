@@ -10,7 +10,7 @@ var product = new mongoose.Schema({
     pictures: { type: Array, required: true },
     available: { type: Boolean, default: true },
     tags: { type: Array }
-})
+}, { timestamps: true })
 
 product.index({ name: 'text' })
 

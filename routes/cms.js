@@ -100,9 +100,9 @@ router.get('/', function(req, res){
 })
 
 router.post('/sign_in', function(req, res) {
-    req.session.auth = req.body.token;
+    req.session.admin = req.body.token;
     // console.log(req.body);
-    if (req.session.auth) {
+    if (req.session.admin) {
         res.status(200).send('done')
     } else {
         res.status(400).send('error')
@@ -111,7 +111,7 @@ router.post('/sign_in', function(req, res) {
 })
 
 router.get('/sign_out', function(req, res) {
-    req.session.auth = undefined;
+    req.session.admin = undefined;
     res.redirect('/cms')
 })
 
@@ -135,7 +135,7 @@ router.get("/images/:filename", (req, res)=>{
 
 // auth middleware
 router.use(function (req, res, next){
-    if(req.session.auth == undefined) {
+    if(req.session.admin == undefined) {
         res.redirect('/cms')
     } else {
         next()

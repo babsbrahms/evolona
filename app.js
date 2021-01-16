@@ -8,12 +8,16 @@ var mongoose = require('mongoose');
 var cors = require('cors')
 var MemoryStore = require('memorystore')(session)
 const MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
 require('dotenv').config();
+
+
 var cartRouter = require('./routes/cart');
 var checkoutRouter = require('./routes/checkout');
 var productRouter = require('./routes/product');
 var cmsRouter = require('./routes/cms');
-var Product = require('./model/product')
+var index = require("./routes/index")
+
 
 var app = express();
 
@@ -59,6 +63,8 @@ app.use(session({
   }, //how long before session expire in milliseconds (24 hours)
 }))
 
+app.use(flash());
+
 // middleware
 app.use(function(req, res, next) {
   res.locals.cart = req.session.cart;
@@ -71,35 +77,10 @@ app.use('/cart', cartRouter);
 app.use('/checkout', checkoutRouter);
 app.use('/product', productRouter);
 app.use('/cms', cmsRouter);
+app.use("/", index)
 
 /* GET home page. */
-app.get('/', function(req, res, next) {
-  
-  const {nav} = req.query;
-  let current = req.session.blog_number || 0;
-  if (nav === 'previous' && (current !== 0) ) {
-    current = current - 1;
-  } else if (nav === 'next') {
-    current = current + 1;
-  } 
 
-  req.session.blog_number = current;
-  let limit = 10;
-  let skip = limit*current;
-  Product.find({}).sort({ _id: -1 }).skip(skip).limit(limit).exec(function (err, clothings) {
-      if (err) {
-        res.locals.error = req.app.get('env') === 'development' ? err||errs : {};
-
-        res.render('/', { page: '', message: err.message});
-      } else if ((clothings.length === 0) && (current !== 0)) {
-        let count = (current > 0)? current - 1 : 0
-        req.session.blog_number = count;
-        res.redirect('/')
-      } else {
-        res.render('index', { page: '', clothings, current_number: current, limit });
-      }
-  })
-});
 
 
 // catch 404 and forward to error handler

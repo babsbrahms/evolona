@@ -18,7 +18,7 @@ var order = new mongoose.Schema({
     },
     date: { type: mongoose.Schema.Types.Date },
     status: { type: String, default: 'ordered'}
-})
+}, { timestamps: true })
 
 var model = mongoose.model('orders', order);
 module.exports = model;

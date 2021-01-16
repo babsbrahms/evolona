@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Evolona | Account</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Evolona online shop">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/cart.css">
+<link rel="stylesheet" type="text/css" href="/styles/cart_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+	
+	<% include ./partials/head %>
+    
+    <%if((msg.length > 0)|| (errors.length > 0)){%><div class="alert <%if(msg.length > 0){%>alert-success<%}else{%>alert-error<%}%> alert-dismissible fade show" role="alert">
+        <%if(msg){%>
+            <%=msg%>
+        <%}%>   
+        <%if(errors){%>
+            <%errors.forEach(function(error) {%>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-danger"><%=error.msg%></li>
+                </ul>
+            <%})%>
+        <%}%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div><%}%>
+	<!-- Cart -->
+
+	<%if(orders.length === 0){%>
+		<div class="cart_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div style="line-height: 1em" class="cart_title text-center">You have not made an order!</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<%} else {%> 
+		<div class="cart_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="cart_title">Your orders</div>
+					</div>
+				</div>
+				
+				<table id="myTable" class="table table-orders color-table table-bordered table-hover">
+					<thead>
+						<tr>
+							<td>transactionRef</td>
+							<td>Total Price</td>
+							<td>State</td>
+							<td>Date</td>
+							<td>Status</td>
+						</tr>
+						</thead>
+						<tbody>
+						<%orders.forEach(function(order) {%> 
+						<tr>
+							<td><a href="/order/<%=order._id%>"><%=order.transactionRef%></a></td>
+							<td><%=order.totalPrice%></td>
+							<td><%=order.address.state%></td>
+							<td><%=new Date(order.date).toLocaleString()%></td>
+							<td><%=order.status%></td>
+						</tr>
+						<%})%>
+					
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	<%}%>
+
+    <!-- Footer -->
+    <nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<li class="page-item">
+				<%if(current_number === 0){%>
+					<a disabled="disabled" class="page-link" aria-label="Previous">
+						<i style="color: #aca6a3" class="fa fa-chevron-left"></i>
+					</a>
+				<%} else {%> 
+					<a href="/account?nav=previous" class="page-link" aria-label="Previous">
+						<i style="color: #937c6f" class="fa fa-chevron-left"></i>
+					</a>
+				<%}%>
+			</li>
+			<li class="page-item">
+				<%if(orders.length < limit){%>
+					<a disabled="disabled" class="page-link" aria-label="Previous">
+						<i style="color: #aca6a3" class="fa fa-chevron-right"></i>
+					</a>
+				<%} else {%> 
+					<a href="/account?nav=next" class="page-link" aria-label="Next">
+						<i style="color: #937c6f" class="fa fa-chevron-right"></i>
+					</a>
+				<%}%>
+			</li>
+		</ul>
+	</nav>
+
+	<% include ./partials/footer %>
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/js/cart_custom.js"></script>
+</body>
+</html>
