@@ -137,9 +137,9 @@ $(document).ready(function()
 	
 	// payment
 	// live key
-	const API_publicKey = "FLWPUBK-998eb969debc88648f3cc40368dd832a-X";
+	// const API_publicKey = "FLWPUBK-748ced89d0a7bacb39f42abed5f452e8-X";
 	// test key
-	// const API_publicKey = 'FLWPUBK_TEST-89c5fcabdb5315248c1af159cb784d4e-X'
+	const API_publicKey = 'FLWPUBK_TEST-b1517ebc9f27980773d303e99c754d23-X'
 	var ref = "MX-"+Date.now()+Math.ceil(Math.random()*100000);
 	
 	document.getElementById('payWithRave').onclick = payWithRave;
@@ -225,7 +225,7 @@ $(document).ready(function()
                             customer_phone: phone,
                             currency: "NGN",
 							txref: ref,
-							redirect_url: `http://www.baz.com.ng/checkout/confirmation/${ref}`,
+							redirect_url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`,
                             meta: [{
                                 metaname: "flightID",
                                 metavalue: "AP1234"

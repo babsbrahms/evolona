@@ -123,11 +123,11 @@ router.post('/order', (req, res) => {
 
   Order.findOne({ transactionRef: txref }, (orderErr, foundOrder) => {
     if (orderErr) {
-      res.status(400).send({ msg: `Your order has been recieved.  All orders are shipped within 3-5 working days. Thank you for shopping at BAZ..`, success: false })
+      res.status(400).send({ msg: `Your order has been recieved.  All orders are shipped within 1 - 2 business days. Thank you for shopping at Evolona..`, success: false })
     } else if(foundOrder){
       console.log(' found it ');
       
-      res.status(400).send({ msg: `Your order has been recieved.  All orders are shipped within 3-5 working days. Thank you for shopping at BAZ..`, success: false })
+      res.status(400).send({ msg: `Your order has been recieved.  All orders are shipped within 1 - 2 business days. Thank you for shopping at Evolona..`, success: false })
     } else if(!foundOrder){
       console.log('NOT founD ');
           //make a post request to the server
@@ -186,7 +186,7 @@ router.post('/order', (req, res) => {
                         
                         product.bulkWrite(productUpdate, function(err, writes) {
                           if (err) {
-                            res.status(200).send({ msg: 'Your order is saved. We delivery on Saturday and Friday. Thank you for shopping at baz.', success: true }) 
+                            res.status(200).send({ msg: 'Your order is saved. We delivery on Saturday and Friday. Thank you for shopping at Evolona.', success: true }) 
                           } else {
                             //res.status(403).send({ msg: 'Your order is not saved', success: false }) 
                             Mailer(YourOrder, shipping, cart.total_price, email, txref, req, res, name, address, state, country, city)
@@ -194,7 +194,7 @@ router.post('/order', (req, res) => {
                           
                         });
                     }).catch(() => {
-                      res.status(400).send({ msg: `Unable to save your order. please send us a picture of your order using the provided email address or phone number. Also add provide your transaction reference number: ${txref}. Thank you for shoppng at baz.`, success: false })
+                      res.status(400).send({ msg: `Unable to save your order. please send us a picture of your order using the provided email address or phone number. Also add provide your transaction reference number: ${txref}. Thank you for shoppng at Evolona.`, success: false })
                     })
                 
           }else{

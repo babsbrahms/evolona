@@ -1,13 +1,13 @@
 
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyC5K59wXrxJrZr8gWBsLhk32seWNeaIGb4",
-    authDomain: "bazonlineshop-4119b.firebaseapp.com",
-    databaseURL: "https://bazonlineshop-4119b.firebaseio.com",
-    projectId: "bazonlineshop-4119b",
-    storageBucket: "bazonlineshop-4119b.appspot.com",
-    messagingSenderId: "968134977334",
-    appId: "1:968134977334:web:3680274dccc93a7a"
+    apiKey: "AIzaSyClaGxc0Nk456w4_eroHtFsBnYmAKPhFTw",
+    authDomain: "evolona-9fa18.firebaseapp.com",
+    projectId: "evolona-9fa18",
+    storageBucket: "evolona-9fa18.appspot.com",
+    messagingSenderId: "410668415631",
+    appId: "1:410668415631:web:aaaf79ea093a31b2584efa",
+    measurementId: "G-R2RY2730LZ"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

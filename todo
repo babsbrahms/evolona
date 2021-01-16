@@ -1,5 +1,9 @@
-create favicon
-firebase account
-heroku account
-flutterwave
-mongodb
+[x]create favicon
+[x]change firebase account
+[] heroku account
+[x] flutterwave
+[x] mongodb online
+
+///deploy
+[] change to live keys in checkout_custom
+[] change to live script in checkout.ejs

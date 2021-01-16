@@ -26,10 +26,10 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
     <br>
     <br>
     <br>
-    <h1 style="text-align: center;font-weight:bolder; font-size: 50px">Baz</h1>
+    <h1 style="text-align: center;font-weight:bolder; font-size: 50px">Evolona</h1>
     <br>
     <h1 style="text-align: center;font-weight:400;">We have recieved your order.</h1>
-    <h1 style="text-align: center; font-weight: normal; font-size: 18px;">Thank you for shopping with us at baz.</h1>
+    <h1 style="text-align: center; font-weight: normal; font-size: 18px;">Thank you for shopping with us at Evolona.</h1>
     <br>
     <hr>
 
@@ -113,37 +113,26 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
     <hr>
 
     <br/>
-    <p style="text-align:center;">For any complaint, enquiries or request, contact us at bazonlineshop@gmail.com or any of our contact below the page. </p>
+    <p style="text-align:center;">For any complaint, enquiries or request, contact us at evolonacompanyltd@gmail.com or any of our contact below the page. </p>
 
     <p style="text-align:center;"> Make sure to include your transaction number when contacting us.</p>
 
     <hr>
+
+    <br>
     <div style="text-align:center;">
-        <a href="https://www.instagram.com/baz.ng/?hl=en">
-            
-                <small class="text-md">Instagram</small>
-        </a>
+        <p>
+            PLOT 143, NABBINGO, NSANGI, BUSIRO, WAKISO DISTRICT. UGANDA.
+        </p>
     </div>
     <br>
     <div style="text-align:center;">
-        <a href="https://twitter.com/Baz_online?lang=en">
+        <a href="mailto:evolonacompanyltd@gmail.com" target="_blank">
             
-                <small class="text-md">Twitter</small>
+                <small class="text-md">evolonacompanyltd@gmail.com</small>
         </a>
     </div>
     <br>
-    <div style="text-align:center;">
-        <a href="mailto:bazonlineshop@gmail.com" target="_blank">
-            
-                <small class="text-md">bazonlineshop@gmail.com</small>
-        </a>
-    </div>
-    <br>
-    <div style="text-align:center;">
-        <a href="tel:09036994176" target="_blank">
-            <small>call 09036994176</small>
-        </i></a>
-    </div>
     <br>
     <br>
     <br>
@@ -154,7 +143,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
     
     // setup email data with unicode symbols
     let mailOptions = {
-        from: `"Baz" <${process.env.email}>`, // sender address
+        from: `"Evolona" <${process.env.email}>`, // sender address
         to: `${to}`, // list of receivers
         subject: 'Notification of your order', // Subject line
         text: 'Hello world?', // plain text body
@@ -165,12 +154,12 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
       // send mail with defined transport object
      transporter.sendMail(mailOptions, (error, info) => {
        if (error) {
-         var ms = req.app.get('env') === 'development' ? error.message : 'Your order has been recieved. We delivery on Saturday and Friday. Thank you for shopping at baz.'
+         var ms = req.app.get('env') === 'development' ? error.message : 'Your order has been recieved. Your order will be delivered within 1 - 2 business day. Thank you for shopping at Evolona.'
         res.status(401).send({ msg: ms , success: false })
        }else{
          console.log('Message sent: %s', info.messageId);
          req.session.cart = undefined; //clear the cart
-         res.status(200).send({ msg: 'Your order is saved. We delivery on Saturday and Friday. Thank you for shopping at baz.', success: true })  
+         res.status(200).send({ msg: 'Your order is saved. Your order will be delivered within 1 - 2 business day. Thank you for shopping at Evolona.', success: true })  
          
        }
      });
