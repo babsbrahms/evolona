@@ -68,6 +68,8 @@ app.use(flash());
 // middleware
 app.use(function(req, res, next) {
   res.locals.cart = req.session.cart;
+  res.locals.auth = req.session.user ? true : false;
+  res.locals.user_email = req.session.user? req.session.user.email : ""
   next()
 })
 

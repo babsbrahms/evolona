@@ -50,46 +50,38 @@
 										<input type="text" name='first_name' class="checkout_input checkout_input_50" placeholder="First Name" required="required">
 										<input type="text" name='last_name' class="checkout_input checkout_input_50" placeholder="Last Name" required="required">
 									</div>
-									<input type="text" name="email" class="checkout_input" placeholder="E-mail" required="required">
-									<select name="country" id="country" class="country_select checkout_input">
+									<input disabled="disabled" type="text" name="email" class="checkout_input" placeholder="E-mail" required="required" value="<%=user_email%>" >
+
+									<!-- <select name="country" id="country" class="country_select checkout_input" >
 										<option>Nigeria</option>
-									</select>
-									<select name="state" id="state" class="country_select checkout_input">
-										<!-- <option value="2500">Abia</option> -->
+									</select> -->
+									<!-- <select name="state" id="state" class="country_select checkout_input">
 										<option value="1500">Abuja</option>
-										<!-- <option value="3500">Adamawa</option> -->
 										<option value="3000">Akwa Ibom</option>
 										<option value="3000">Anambra</option>
-										<!-- <option value="3000">Bauchi</option> -->
 										<option value="3000">Bayelsa</option>
 										<option value="3000">Benue</option>
-										<!-- <option value="3500">Borno</option> -->
 										<option value="3000">Cross River</option>
 										<option value="3000">Delta</option>
 										<option value="3000">Ebonyi</option>
 										<option value="3000">Edo</option>
 										<option value="1500">Ekiti</option>
 										<option value="2500">Enugu</option>
-										<!-- <option value="1500">Gombe</option> -->
 										<option value="3000">Imo</option>
-										<!-- <option value="1500">Jigawa</option> -->
 										<option value="3300">Kaduna</option>
 										<option value="3500">Kano</option>
-										<!-- <option value="1500">Kastina</option> -->
-										<!-- <option value="1500">Kebbi</option> -->
 										<option value="1500">Kogi</option>
 										<option value="0">Kwara</option>
 										<option value="1500">Lagos</option>
 										<option value="2000">Nassarawa</option>
-										<!-- <option value="1500">Niger</option> -->
 										<option value="1500">Ogun</option>
 										<option value="1500">Ondo</option>
 										<option value="1500">Osun</option>
 										<option value="1500">Oyo</option>
 										<option value="3000">River</option>
-										
-										
-									</select>
+									</select> -->
+									<input type="text" name="country" class="checkout_input" placeholder="country" required="required">
+									<input type="text" name="state" class="checkout_input" placeholder="state" required="required">
 									<input type="text" name="city" class="checkout_input" placeholder="city" required="required">
 									<input type="text" name="address" class="checkout_input" placeholder="Address" required="required">
 									<input type="text" name="phone" class="checkout_input" placeholder="Phone No" required="required">
@@ -124,11 +116,11 @@
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_total_title">Shipping</div>
-										<div id="shipping" class="cart_total_price ml-auto"> $ 0</div>
+										<div id="shipping" class="cart_total_price ml-auto"> $ 5.99</div>
 									</li>
 									<li class="d-flex flex-row align-items-start justify-content-start total_row">
 										<div class="cart_total_title">Total</div>
-										<div id="total_price" class="cart_total_price ml-auto">$<%=(cart.total_price) + 2000%></div>
+										<div id="total_price" class="cart_total_price ml-auto">$<%=(cart.total_price) + 5.99%></div>
 									</li>
 								</ul>
 							</div>

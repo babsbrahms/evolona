@@ -87,7 +87,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
         <tr>
             <td colspan="4">
                 <th style="padding-top: 10px;">
-                    Sub Total: NGN ${totaPrice}
+                    Sub Total: USD ${totaPrice}
                 </th>
             </td>
         </tr>
@@ -96,7 +96,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
 
             <td colspan="4">
                 <th style="padding-top: 10px;">
-                    Shipping: NGN ${shipping}
+                    Shipping: USD ${shipping}
                 </th>
             </td>
         </tr>
@@ -104,7 +104,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
         <tr>
             <td colspan="4">
                 <th style="padding-top: 10px;">
-                    Total: NGN ${totaPrice + shipping}
+                    Total: USD ${totaPrice + shipping}
                 </th>
             </td>
         </tr>

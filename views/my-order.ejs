@@ -35,7 +35,7 @@
                         <h5 class="card-title m-b-0 align-self-center text-uppercase"> Transaction Ref: <%=order.transactionRef%></h5>
                         <div class="ml-auto">
                             <ul class="list-inline m-t-5 text-muted text-uppercase lp-5 font-medium font-12">
-                            <li>19.07.2018, 12:15</li>
+                            <li><%=new Date(order.date).toLocaleString()%></li>
                             
                             </ul>
                         </div>
@@ -58,13 +58,13 @@
                                     <%order.cart.products.forEach(function(cart) {%>
                                     <tr>
                                     <td><%=cart.id%></td>
-                                    <td><img src="<%=cart.product.pictures[0]%>" alt="" title=""> </td>
+                                    <td><img width="80px" src="<%=cart.product.pictures[0]%>" alt="" title=""> </td>
                                                     <td class="text-dark weight-600">
                                                     <%=cart.name%> | <%=cart.size%>
                                     </td>
-                                    <td>NGN <%=cart.price%></td>
+                                    <td>USD <%=cart.price%></td>
                                     <td><%=cart.qty%></td>
-                                    <td>NGN <%=(cart.price) * (cart.qty)%></td>
+                                    <td>USD <%=(cart.price) * (cart.qty)%></td>
                                     
                                     </tr>
                                     <%})%>
@@ -73,7 +73,7 @@
                                     
                                     <td colspan="3" class="text-muted custom-product">Subtotal Price:
                                 </td>
-                                    <td class="custom-product">NGN <%=order.cart.total_price%></td>
+                                    <td class="custom-product">USD <%=order.cart.total_price%></td>
                                     
                                     </tr>
                                     
@@ -82,7 +82,7 @@
                                     
                                     <td colspan="3" class="text-muted no-border">Shipping:
                                 </td>
-                                    <td class="no-border">NGN <%=order.shipping%></td>
+                                    <td class="no-border">USD <%=order.shipping%></td>
                                     
                                     </tr>
                                     
@@ -98,7 +98,7 @@
                                     <td class="no-border" colspan="2">&nbsp;</td>
                                     <td colspan="3" class="text-dark no-border weight-600">Total Price:
                                 </td>
-                                    <td class="no-border">NGN <%=order.totalPrice%></td>
+                                    <td class="no-border">USD <%=order.totalPrice%></td>
                                     
                                     </tr>
                                     

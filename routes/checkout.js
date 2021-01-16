@@ -12,7 +12,7 @@ var csrfProtection = csrf()
 router.use(csrfProtection)
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', loggedIn, function(req, res, next) {
   res.render('checkout', { page: ' | Checkout', csrfToken: req.csrfToken() })
 });
 
@@ -139,7 +139,7 @@ router.post('/order', (req, res) => {
        // check status is success.
           if (response.body.data.status === "successful" &&
               response.body.data.chargecode === "00" &&
-              response.body.data.currency === "NGN" &&
+              response.body.data.currency === "USD" &&
               response.body.data.amount === ( Number(cart.total_price) + Number(shipping)) ) {
                 // console.log('Success CHARGE');
                   
@@ -178,7 +178,7 @@ router.post('/order', (req, res) => {
                               <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">${prod.name}</td>
                               <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">${prod.size}</td>
                               <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">${prod.qty} unit</td>
-                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">NGN ${prod.price * prod.qty}</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">USD ${prod.price * prod.qty}</td>
                             </tr>
                               `
                         });
@@ -205,5 +205,15 @@ router.post('/order', (req, res) => {
     }
   })
 })
+
+function loggedIn (req, res, next) {
+  if (req.session.user) {
+      next()
+
+  } else {
+      req.flash('errors', "Login is required")
+      res.redirect('/login');
+  }
+}
 
 module.exports = router;

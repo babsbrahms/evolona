@@ -23,7 +23,7 @@
 					
 				
 
-					<div style="padding-right: 30px; padding-left: 15px" class="shopping">
+					<div style="padding-right: 10px; padding-left: 10px; align-self: flex-end;" class="shopping">
 						<!-- Cart -->
 						<a href="/cart">
 							<div class="cart">
@@ -38,9 +38,28 @@
 								</div>
 							</div>
 						</a>
-						<a href="/account" aria-label="Next">
-							<i style="color: #937c6f; font-size: 24px;" class="fa fa-user"></i>
-						</a>
+
+						<!-- <ul>
+							<li>
+								<a href="/account" aria-label="Next">
+									<i style="color: #937c6f; font-size: 24px;" class="fa fa-user"></i> Account
+								</a>
+							</li>
+
+							<%if(auth){%>			
+								<li>
+									<a href="/logout" aria-label="Next">
+										<i style="color: #937c6f; font-size: 24px;" class="fa fa-user"></i> Logout
+									</a>
+								</li>
+							<%} else {%> 
+								<li>
+									<a href="/login" aria-label="Next">
+										<i style="color: #937c6f; font-size: 24px;" class="fa fa-user"></i> Login
+									</a>
+								</li>
+							<%}%>
+							</ul> -->
 					</div>
 				</div>
 	

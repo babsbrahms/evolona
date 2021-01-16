@@ -7,3 +7,15 @@
 ///deploy
 [] change to live keys in checkout_custom
 [] change to live script in checkout.ejs
+[] redirect url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`
+[] Account, logout and login icon
+[] forgot password
+[] pagginate cms product
+[] paginate cms order
+[] add currency in order
+
+
+shipping cost
+shipping states
+confirm currency
+is the shipping world wide or only uganda

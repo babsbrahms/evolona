@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
 
 // route for admin signup
 router.get('/signup', (req, res) => {
-  if (req.session.user && req.cookies.user_sid) {
+  if (req.session.user) {
     req.flash('msg', 'You are already logged in')
     res.redirect('/account')
   } else {
@@ -98,7 +98,7 @@ router.post('/signup',
 
 // route for user Login
 router.get('/login', (req, res) => {
-  if (req.session.user && req.cookies.user_sid) {
+  if (req.session.user) {
     req.flash('msg', 'You are already logged in')
     res.redirect('/account')
   } else {
@@ -139,7 +139,7 @@ router.post('/login',
 
 // route for user logout
 router.get('/logout', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
+    if (req.session.user) {
         req.flash('msg', "Logout successful")
         res.clearCookie('user_sid');
         req.session.user = null;
@@ -188,24 +188,23 @@ router.get("/order/:id", (req, res) => {
   var id = req.params.id
   // console.log(id);
 
-  Order.findOne({ _id: id}, function(err, product) {
+  Order.findOne({ _id: id}, function(err, order) {
       
       if (err) {
           res.locals.error = req.app.get('env') === 'development' ? err : {};
           res.render('error', { page: ' | CMS', message: 'Order not found'})
-      } else if (product == null) {
+      } else if (order == null) {
           res.locals.error = req.app.get('env') === 'development' ? {} : {};
           res.render('error', { page: ' | Order', message: 'Order not found'})
       }else {
           
-          res.render('my-order', { page: '| Order', orders })
+          res.render('my-order', { page: '| Order', order })
       }
   }) 
 })
 
 function loggedIn (req, res, next) {
     if (req.session.user) {
-        
         next()
 
     } else {

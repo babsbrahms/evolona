@@ -1254,14 +1254,14 @@ function computeStyle(data, options) {
  * @method
  * @memberof Popper.Utils
  * @param {Array} modifiers - list of modifiers
- * @param {String} requestingName - name of requesting modifier
+ * @param {String} requestiUSDame - name of requesting modifier
  * @param {String} requestedName - name of requested modifier
  * @returns {Boolean}
  */
-function isModifierRequired(modifiers, requestingName, requestedName) {
+function isModifierRequired(modifiers, requestiUSDame, requestedName) {
   var requesting = find(modifiers, function (_ref) {
     var name = _ref.name;
-    return name === requestingName;
+    return name === requestiUSDame;
   });
 
   var isRequired = !!requesting && modifiers.some(function (modifier) {
@@ -1269,7 +1269,7 @@ function isModifierRequired(modifiers, requestingName, requestedName) {
   });
 
   if (!isRequired) {
-    var _requesting = '`' + requestingName + '`';
+    var _requesting = '`' + requestiUSDame + '`';
     var requested = '`' + requestedName + '`';
     console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
   }

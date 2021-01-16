@@ -25,7 +25,7 @@ $(document).ready(function()
 	var menuActive = false;
 	var menu = $('.menu');
 	var burger = $('.burger_container');
-	var choosen_state = document.getElementById('state');
+	// var choosen_state = document.getElementById('state');
 	var hidde_total_price = document.getElementById('hidde_total_price');
 	var alert = document.getElementById('alert');
 
@@ -33,9 +33,9 @@ $(document).ready(function()
 	alert.style.display = 'none';
 
 	// setting shipping price and total price
-	document.getElementById('shipping').innerHTML = '$' + choosen_state.value;
-	var total = Number(hidde_total_price.value) + Number(choosen_state.value)
-	document.getElementById('total_price').innerHTML = '$' + total;
+	// document.getElementById('shipping').innerHTML = '$' + choosen_state.value;
+	// var total = Number(hidde_total_price.value) + Number(choosen_state.value)
+	// document.getElementById('total_price').innerHTML = '$' + total;
 
 
 
@@ -125,13 +125,13 @@ $(document).ready(function()
 
 
 	// get shipping price
-	choosen_state.addEventListener('change', changePrice)
+	// choosen_state.addEventListener('change', changePrice)
 
-	 function changePrice (){
-		document.getElementById('shipping').innerHTML = choosen_state.value + ' US Dollar';
-		var total = Number(hidde_total_price.value) + Number(choosen_state.value)
-		document.getElementById('total_price').innerHTML = total + ' US Dollar';
-	}
+	//  function changePrice (){
+	// 	document.getElementById('shipping').innerHTML = choosen_state.value + ' US Dollar';
+	// 	var total = Number(hidde_total_price.value) + Number(choosen_state.value)
+	// 	document.getElementById('total_price').innerHTML = total + ' US Dollar';
+	// }
 	
 	
 	
@@ -155,13 +155,13 @@ $(document).ready(function()
 		var last = form['last_name'].value;
 		var email = form['email'].value;
 		var country = form['country'].value;
-		var stateIndex = form['state'].selectedIndex;
-		var state = form['state'].options[form['state'].selectedIndex].innerHTML;
+		// var stateIndex = form['state'].selectedIndex;
+		var state = form['state'].value
 		var city = form['city'].value;
 		var address = form['address'].value;
 		var phone = form['phone'].value;
-		var amount =  Number(hidde_total_price.value) + Number(choosen_state.value);
-		var shipping = Number(choosen_state.value);
+		var amount =  Number(hidde_total_price.value) + Number(5.99);
+		var shipping = 5.99;
 		var cart = e.target.getAttribute('data_cart')
 		var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
@@ -177,7 +177,9 @@ $(document).ready(function()
 			}
 			// set value in localstorage
 			var userObj = {
-				first, last, email, country, state, stateIndex, city , address, phone, amount, shipping
+				first, last, 
+				//email, 
+				country, state, city , address, phone, amount, shipping
 			}
 
 			console.log({...userObj, newState: state, txRef: ref });
@@ -223,9 +225,9 @@ $(document).ready(function()
 							customer_lastname: last,
                             amount: amount,
                             customer_phone: phone,
-                            currency: "NGN",
+                            currency: "USD",
 							txref: ref,
-							redirect_url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`,
+							redirect_url: `localhost:4000/checkout/confirmation/${ref}`,
                             meta: [{
                                 metaname: "flightID",
                                 metavalue: "AP1234"
@@ -310,25 +312,25 @@ $(document).ready(function()
 });
 
 
-	// set form from localstorage
+	// // set form from localstorage
 	var userDa = JSON.parse(window.localStorage.getItem('userObj'));
 	
 	if(userDa != undefined) {
 		var form = document.getElementById('checkout_form');
 		form['first_name'].value = userDa.first;
 		form['last_name'].value = userDa.last;
-		form['email'].value = userDa.email;
+		// form['email'].value = userDa.email;
 		form['country'].value = userDa.country;
 		form['state'].selectedIndex = userDa.stateIndex;
 		form['city']. value = userDa.city || "";
 		form['address'].value = userDa.address;
 		form['phone'].value = userDa.phone;
 
-		// chnage price
-		var choosen_state = document.getElementById('state');
-		document.getElementById('shipping').innerHTML = choosen_state.value + ' US Dollar';
-		var total = Number(hidde_total_price.value) + Number(choosen_state.value)
-		document.getElementById('total_price').innerHTML = total + ' US Dollar';
+	// 	// chnage price
+	// 	var choosen_state = document.getElementById('state');
+	// 	document.getElementById('shipping').innerHTML = choosen_state.value + ' US Dollar';
+	// 	var total = Number(hidde_total_price.value) + Number(choosen_state.value)
+	// 	document.getElementById('total_price').innerHTML = total + ' US Dollar';
 	}
 
 
