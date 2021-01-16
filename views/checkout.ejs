@@ -113,22 +113,22 @@
 									<%cart.products.forEach(function(product) {%>
 										<li class="d-flex flex-row align-items-center justify-content-start">
 											<div class="cart_total_title"><%=product.name%> | <%=product.size%> x <%=product.qty%></div>
-											<div class="cart_total_price ml-auto"><%=(product.price)*(product.qty)%> Naira</div>
+											<div class="cart_total_price ml-auto">$ <%=(product.price)*(product.qty)%></div>
 										</li>
 									<%})%>
 									
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_total_title">Subtotal</div>
-										<div class="cart_total_price ml-auto"><%=cart.total_price%> Naira</div>
+										<div class="cart_total_price ml-auto">$ <%=cart.total_price%></div>
 										<input type="hidden" id="hidde_total_price" name="hidde_total_price" value="<%=cart.total_price%>">
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_total_title">Shipping</div>
-										<div id="shipping" class="cart_total_price ml-auto"> 0 Naira</div>
+										<div id="shipping" class="cart_total_price ml-auto"> $ 0</div>
 									</li>
 									<li class="d-flex flex-row align-items-start justify-content-start total_row">
 										<div class="cart_total_title">Total</div>
-										<div id="total_price" class="cart_total_price ml-auto"><%=(cart.total_price) + 2000%> Naira</div>
+										<div id="total_price" class="cart_total_price ml-auto">$<%=(cart.total_price) + 2000%></div>
 									</li>
 								</ul>
 							</div>

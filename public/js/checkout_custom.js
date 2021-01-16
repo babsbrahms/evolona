@@ -33,9 +33,9 @@ $(document).ready(function()
 	alert.style.display = 'none';
 
 	// setting shipping price and total price
-	document.getElementById('shipping').innerHTML = choosen_state.value + ' Naira';
+	document.getElementById('shipping').innerHTML = '$' + choosen_state.value;
 	var total = Number(hidde_total_price.value) + Number(choosen_state.value)
-	document.getElementById('total_price').innerHTML = total + ' Naira';
+	document.getElementById('total_price').innerHTML = '$' + total;
 
 
 
@@ -128,9 +128,9 @@ $(document).ready(function()
 	choosen_state.addEventListener('change', changePrice)
 
 	 function changePrice (){
-		document.getElementById('shipping').innerHTML = choosen_state.value + ' Naira';
+		document.getElementById('shipping').innerHTML = choosen_state.value + ' US Dollar';
 		var total = Number(hidde_total_price.value) + Number(choosen_state.value)
-		document.getElementById('total_price').innerHTML = total + ' Naira';
+		document.getElementById('total_price').innerHTML = total + ' US Dollar';
 	}
 	
 	
@@ -326,9 +326,9 @@ $(document).ready(function()
 
 		// chnage price
 		var choosen_state = document.getElementById('state');
-		document.getElementById('shipping').innerHTML = choosen_state.value + ' Naira';
+		document.getElementById('shipping').innerHTML = choosen_state.value + ' US Dollar';
 		var total = Number(hidde_total_price.value) + Number(choosen_state.value)
-		document.getElementById('total_price').innerHTML = total + ' Naira';
+		document.getElementById('total_price').innerHTML = total + ' US Dollar';
 	}
 
 

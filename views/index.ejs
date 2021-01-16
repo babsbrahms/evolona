@@ -64,7 +64,7 @@
 										<%if (product.sizes.reduce((prev, curr) => prev + curr.qty, 0) <= 0) {%>
 											SOLD OUT
 										<%} else {%> 
-											&#8358; <%=product.price %>
+											$ <%=product.price %>
 										<%}%>
 									</div>
 								</div>

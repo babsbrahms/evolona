@@ -26,7 +26,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="cart_title">your shopping cart</div>
-					<small style="font-weight: bold; margin-top: 20px;">All orders are shipped within 3-5 working days</small>
+					<small style="font-weight: bold; margin-top: 20px;">All orders are shipped within 1-2 business days days</small>
 				</div>
 			</div>
 			<div class="row">
@@ -58,11 +58,11 @@
 										
 										<div class="cart_product_info_inner d-flex flex-row align-items-center justify-content-between">
 											<!-- Product Price -->
-											<div class="cart_product_price"><%=product.price%> Naira</div>
+											<div class="cart_product_price">$<%=product.price%></div>
 											<!-- Product Quantity -->
 											<input type="number" name="<%=product.id%>" class="text-center product_qty" id="product_qty" value="<%=product.qty%>" data-size="<%=product.size%>" data-id="<%=product.id%>" pattern="[0-9]*" style="border-color: #5f5d5d; padding-top: 5px; padding-bottom: 5px; width: 70px">
 											<!-- Products Total Price -->
-											<div class="cart_product_total"><%=(product.price)*(product.qty)%> Naira</div>
+											<div class="cart_product_total">$ <%=(product.price)*(product.qty)%></div>
 											<!-- Product Cart Trash Button -->
 											<div id="delete_button" class="cart_product_button" data-id="<%=product.id%>">
 												<button class="cart_product_remove" id="button_remove" data-size="<%=product.size%>" data-id="<%=product.id%>" ><img data-id="<%=product.id%>" class="cart_trash" src="images/trash.png" alt=""></button>
@@ -85,7 +85,7 @@
 						<ul>
 							<li class="d-flex flex-row align-items-center justify-content-start">
 								<div class="cart_total_title">Total</div>
-								<div class="cart_total_price ml-auto"><%=cart.total_price%> Naira</div>
+								<div class="cart_total_price ml-auto">$ <%=cart.total_price%></div>
 							</li>
 						</ul>
 						<button class="cart_total_button" id="to_checkout" onclick="javascript:void(0)">
