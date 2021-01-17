@@ -160,7 +160,7 @@ $(document).ready(function()
 		var city = form['city'].value;
 		var address = form['address'].value;
 		var phone = form['phone'].value;
-		var amount =  Number(hidde_total_price.value).toFixed(2) + Number(5.99).toFixed(2);
+		var amount =  Number(hidde_total_price.value) + Number(5.99)
 		var shipping = 5.99;
 		var cart = e.target.getAttribute('data_cart')
 		var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -227,7 +227,7 @@ $(document).ready(function()
                             customer_phone: phone,
                             currency: "USD",
 							txref: ref,
-							redirect_url: `localhost:4000/checkout/confirmation/${ref}`,
+							redirect_url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`,
                             meta: [{
                                 metaname: "flightID",
                                 metavalue: "AP1234"
