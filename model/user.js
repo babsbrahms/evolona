@@ -5,7 +5,14 @@ var Schema = mongoose.Schema;
 
 var user = new Schema({
     email: { type: String, required: true, unique: true },
-    password: { type: String, min: 5 }
+    password: { type: String, min: 5 },
+    token: { type: String },
+    address: {
+        address: { type: String },
+        city: { type: String },
+        state: { type: String },
+        country: { type: String }
+    },
 }, { timestamps: true })
 
 user.methods.hashPassword = (password) => {

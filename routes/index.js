@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 var User = require('../model/user');
 var Order = require("../model/order")
 var Product = require("../model/product");
+const ResetPassword = require('../utils/ResetPassword');
 
 
 router.get('/', function(req, res, next) {
@@ -36,6 +37,8 @@ router.get('/', function(req, res, next) {
       }
   })
 });
+
+
 
 // route for admin signup
 router.get('/signup', (req, res) => {
@@ -137,6 +140,99 @@ router.post('/login',
   });
 })
 
+router.get("/forgot_password", (req, res) => {
+    res.render('forgot-password', { page: '| Forgot Password', msg: req.flash('msg'), errors: req.flash('errors')})
+})
+
+
+router.post("/forgot_password", 
+    [check('email', 'Email is required').notEmpty()],
+    (req, res) => {
+    const {email} = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      req.flash('errors', errors.array() )
+
+      return res.redirect('/forgot_password')
+    }
+
+    User.findOne({ email }).then(function (user) {
+      if (!user) {
+          req.flash('errors', [{ msg: 'User not found. Enter a valid email.'}] )
+          res.redirect('/forgot_password');
+      } else {
+          // let time = new Date().getTime() + (60000 * 30) //15 min
+          let text = `${Math.floor(Math.random()*100)}c${Math.floor(Math.random()*100)}`
+          user.update({ 
+            $set: {
+              token: text
+            }
+          }, (err, raw) => {
+              if (err) {
+                  res.locals.error = req.app.get('env') === 'development' ? err : {};
+                  res.render('error', { page: ' | CMS', message: 'Problem adding product'})
+              } else {
+                  ResetPassword(req, res, text)           
+              }
+          })
+      }
+    });
+})
+
+
+
+router.get("/reset_password", (req, res) => {
+    res.render('reset-password', { page: '| Reset Password', msg: req.flash('msg'), errors: req.flash('errors')})
+})
+
+
+
+router.post("/reset_password", 
+    [check('email', 'Email is required').notEmpty(), check('token', "Token is required").notEmpty(), check('password', 'Password is required').notEmpty() ],
+    (req, res) => {
+    const {email, token, password} = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      req.flash('errors', errors.array() )
+
+      return res.redirect('/reset_password')
+    }
+
+    User.findOne({ email }).then(function (user) {
+      if (!user) {
+          req.flash('errors', [{ msg: 'User not found. Enter a valid email.'}] )
+          res.redirect('/reset_password');
+      } if (user.token !== token) {
+        req.flash('errors', [{ msg: 'Invalid Token'}] )
+        res.redirect('/reset_password');
+      } else {
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+
+        user.update({
+          $set: {
+            password: hash
+          }
+        }, (err) => {
+          if (err) {
+            res.locals.error = req.app.get('env') === 'development' ? err : {};
+            res.render('error', { page: ' | CMS', message: 'Problem updating your password'})
+        } else {
+            req.flash('msg', 'Password changed!')
+            res.redirect('/login');            
+        }
+        })
+      }
+    });
+})
+
+
+
+
 // route for user logout
 router.get('/logout', (req, res) => {
     if (req.session.user) {
@@ -208,7 +304,7 @@ function loggedIn (req, res, next) {
         next()
 
     } else {
-        req.flash('errors', "Login is required")
+        // req.flash('errors', "Login is required")
         res.redirect('/login');
     }
 }
