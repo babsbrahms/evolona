@@ -1,6 +1,6 @@
 	<!-- Header -->
 
-	<header class="header">
+	<!-- <header class="header">
 			<div class="header_inner d-flex flex-row align-items-center justify-content-start">
 				<div class="logo"><a href="/">Evolona <%=page || ""%></a></div>
 				<div class="header_content ml-auto">
@@ -24,7 +24,6 @@
 				
 
 					<div style="padding-right: 10px; padding-left: 10px; align-self: flex-end;" class="shopping">
-						<!-- Cart -->
 						<a href="/cart">
 							<div class="cart">
 								<img src="images/shopping-bag.svg" alt="">
@@ -63,13 +62,95 @@
 					</div>
 				</div>
 	
-				<!-- <div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"><div></div><div></div><div></div></div> -->
 			</div>
 			<ul id="search_result" class="list-group list-group-flush col-6 col-sm-8 offset-6 offset-sm-2">
 
 			</ul>
-		</header>
+		</header> -->
 		
+
+		<header class="header">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="/">Evolona</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  User
+						</a>
+						<div style="padding: 3px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a href="/account" aria-label="Next">
+								<i style="color: #937c6f; font-size: 16px;" class="fa fa-user"></i> Account
+							</a>
+						  <div class="dropdown-divider"></div>
+						  <%if(auth){%>			
+							<a href="/logout" aria-label="Next">
+								<i style="color: #937c6f; font-size: 16px;" class="fa fa-sign-out"></i> Logout
+							</a>
+						<%} else {%> 
+							<a href="/login" aria-label="Next">
+								<i style="color: #937c6f; font-size: 16px;" class="fa fa-sign-in"></i> Login
+							</a>
+						<%}%>
+						</div>
+					  </li>
+					<!-- <li class="nav-item">
+						<a href="/account" aria-label="Next">
+							<i style="color: #937c6f; font-size: 24px;" class="fa fa-user"></i> Account
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<%if(auth){%>			
+							<a href="/logout" aria-label="Next">
+								<i style="color: #937c6f; font-size: 24px;" class="fa fa-sign-out"></i> Logout
+							</a>
+						<%} else {%> 
+							<a href="/login" aria-label="Next">
+								<i style="color: #937c6f; font-size: 24px;" class="fa fa-sign-in"></i> Login
+							</a>
+						<%}%>
+					</li> -->
+				</ul>
+				<!-- <form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form> -->
+				<div id="search_div" class="search form-inline my-2 my-lg-0">
+					<form action="#">
+						<input type="search" id="search" class="search_input menu_mm" required="required">
+						<button type="submit" id="search_button_menu" class="search_button menu_mm"><img class="menu_mm" src="images/magnifying-glass.svg" alt=""></button>
+					</form>
+					
+				</div>
+				<li style="list-style: none;" class="nav-item">
+					<a href="/cart">
+						<div class="cart">
+							<img src="images/shopping-bag.svg" alt=""> Cart
+							<div class="cart_num_container">
+								<div class="cart_num_inner">
+										<%if(cart) {%>
+											<div class="cart_num"><%=cart?  cart.total_qty : 0 %></div>
+										<%}%>
+									
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+			</div>
+		</nav>
+	</header>
+
+		<ul id="search_result" class="list-group list-group-flush col-6 col-sm-8 offset-6 offset-sm-2">
+
+		</ul>
+
+	<h2><%=page || ""%></h2>
 		<!-- Menu -->
 <!-- 	
 		<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
@@ -92,8 +173,9 @@
 		<br>
 		<br>
 		<br>
+		<h2 style="text-align: center;">Evolona <%=page || ""%></h2>
 		<br>
-	
+		
 		<script>
 			var search = document.getElementById('search')
 			var search_result = document.getElementById('search_result')

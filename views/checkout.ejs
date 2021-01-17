@@ -120,7 +120,7 @@
 									</li>
 									<li class="d-flex flex-row align-items-start justify-content-start total_row">
 										<div class="cart_total_title">Total</div>
-										<div id="total_price" class="cart_total_price ml-auto">$<%=(cart.total_price) + 5.99%></div>
+										<div id="total_price" class="cart_total_price ml-auto">$<%=(cart.total_price + 5.99).toFixed(2)%></div>
 									</li>
 								</ul>
 							</div>

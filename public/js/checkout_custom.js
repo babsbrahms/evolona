@@ -160,7 +160,7 @@ $(document).ready(function()
 		var city = form['city'].value;
 		var address = form['address'].value;
 		var phone = form['phone'].value;
-		var amount =  Number(hidde_total_price.value) + Number(5.99);
+		var amount =  Number(hidde_total_price.value).toFixed(2) + Number(5.99).toFixed(2);
 		var shipping = 5.99;
 		var cart = e.target.getAttribute('data_cart')
 		var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')

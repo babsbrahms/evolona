@@ -94,7 +94,6 @@ const productImage = multer({ storage }).array('pictures');
 
 // cms login
 router.get('/', function(req, res){
-    console.log(req.cookies);
     
     res.render('cms', { page: ' | CMS' })
 })
