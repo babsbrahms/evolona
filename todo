@@ -10,9 +10,11 @@
 [] redirect url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`
 [] Account, logout and login icon
 [] forgot password
-[] pagginate cms product
-[] paginate cms order
-[] add currency in order
+[x] pagginate cms product
+[x] paginate cms order
+[x] add currency in order
+[x] Email Account
+[]
 
 
 shipping cost

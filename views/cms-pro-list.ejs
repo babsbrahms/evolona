@@ -139,7 +139,32 @@
         </div>
 
 
-
+        <nav class="blog-pagination justify-content-center d-flex">
+          <ul class="pagination">
+            <li class="page-item">
+              <%if(current_number === 0){%>
+                <a disabled="disabled" class="page-link" aria-label="Previous">
+                  <i style="color: #aca6a3" class="fa fa-chevron-left"></i>
+                </a>
+              <%} else {%> 
+                <a href="/cms/product-list?nav=previous" class="page-link" aria-label="Previous">
+                  <i style="color: #937c6f" class="fa fa-chevron-left"></i>
+                </a>
+              <%}%>
+            </li>
+            <li class="page-item">
+              <%if(products.length < limit){%>
+                <a disabled="disabled" class="page-link" aria-label="Previous">
+                  <i style="color: #aca6a3" class="fa fa-chevron-right"></i>
+                </a>
+              <%} else {%> 
+                <a href="/cms/product-list?nav=next" class="page-link" aria-label="Next">
+                  <i style="color: #937c6f" class="fa fa-chevron-right"></i>
+                </a>
+              <%}%>
+            </li>
+          </ul>
+        </nav>
         <!-- ============================================================== -->
         <!-- End Info box -->
         <!-- chart box two -->

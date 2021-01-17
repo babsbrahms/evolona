@@ -287,12 +287,24 @@ router.get('/order-page/:id', function(req, res){
 
 // list orders 
 router.get('/orders', function(req, res){
-    Order.find({}).sort({ _id: -1}).exec(function(err, orders) {
+    const {nav} = req.query;
+    let current = req.session.blog_number || 0;
+    if (nav === 'previous' && (current !== 0) ) {
+      current = current - 1;
+    } else if (nav === 'next') {
+      current = current + 1;
+    } 
+  
+    req.session.blog_number = current;
+    let limit = 25;
+    let skip = limit*current;
+
+    Order.find({}).sort({ _id: -1}).skip(skip).limit(limit).exec(function(err, orders) {
         if (err) {
             res.locals.error = req.app.get('env') === 'development' ? err : {};
             res.render('error', { page: ' | CMS', message: 'Orders not found'})
         } else {
-            res.render('cms-orders', { orders})
+            res.render('cms-orders', { orders, current_number: current, limit})
         }
     })
     
@@ -328,12 +340,23 @@ router.delete('/order_remove/:id', function(req, res) {
 
 // list products √
 router.get('/product-list', function(req, res){
-    Product.find({}).sort({ _id: -1}).exec(function(err, products) {
+    const {nav} = req.query;
+    let current = req.session.blog_number || 0;
+    if (nav === 'previous' && (current !== 0) ) {
+      current = current - 1;
+    } else if (nav === 'next') {
+      current = current + 1;
+    } 
+  
+    req.session.blog_number = current;
+    let limit = 25;
+    let skip = limit*current;
+    Product.find({}).sort({ _id: -1}).skip(skip).limit(limit).exec(function(err, products) {
         if (err) {
             res.locals.error = req.app.get('env') === 'development' ? err : {};
             res.render('error', { page: ' | CMS', message: 'Products not found'})
         } else {
-            res.render('cms-pro-list', { products })
+            res.render('cms-pro-list', { products, current_number: current, limit })
         }
     })  
 })

@@ -1,24 +1,24 @@
 var nodemailer = require('nodemailer')
 
 function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, name, address, state, country, city) {
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        tls: true,
-        auth: {
-          user: process.env.mail_user, // generated ethereal user
-          pass: process.env.mail_password // generated ethereal password
-       }
-    });
-
     // let transporter = nodemailer.createTransport({
-    //   host: 'smtp.mail.yahoo.com',
-    //   port: 587,
-    //   secure: false, // true for 465, false for other ports
-    //   auth: {
-    //        user: "nastyyinks@yahoo.com", // generated ethereal user
-    //        pass: "Trailblazer94"// generated ethereal password
-    //   }
+    //     service: 'gmail',
+    //     tls: true,
+    //     auth: {
+    //       user: process.env.mail_user, // generated ethereal user
+    //       pass: process.env.mail_password // generated ethereal password
+    //    }
     // });
+
+    let transporter = nodemailer.createTransport({
+      host: 'smtp-relay.sendinblue.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+            user: "evolonacompanyltd@gmail.com", // generated ethereal user
+            pass: "qz0kfPUFKM8yOJms" // generated ethereal password
+      }
+    });
 
       
     let mail = `

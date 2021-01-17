@@ -321,7 +321,7 @@ $(document).ready(function()
 		form['last_name'].value = userDa.last;
 		// form['email'].value = userDa.email;
 		form['country'].value = userDa.country;
-		form['state'].selectedIndex = userDa.stateIndex;
+		form['state'].value = userDa.state;
 		form['city']. value = userDa.city || "";
 		form['address'].value = userDa.address;
 		form['phone'].value = userDa.phone;

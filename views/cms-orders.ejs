@@ -82,7 +82,7 @@
                         <td>Customer</td>
                     
                         <td>Total Price</td>
-                        <td>State</td>
+                        <td>Conutry</td>
                         <td>Date</td>
                         <td>Status</td>
                   
@@ -99,7 +99,7 @@
                         <td><%=order.transactionRef%></td>
                         <td class="text-dark weight-600"><a href="/cms/order-page/<%=order._id%>"><%=order.name%></a> </td>
                         <td><%=order.totalPrice%></td>
-                        <td><%=order.address.state%></td>
+                        <td><%=order.address.country%></td>
                         <td><%=new Date(order.date).toLocaleString()%></td>
                         <td class="product-status">
                           <select class="select" name="" data-id="<%=order._id%>">
@@ -126,6 +126,34 @@
           </div>
           <!-- Column -->
         </div>
+
+
+        <nav class="blog-pagination justify-content-center d-flex">
+          <ul class="pagination">
+            <li class="page-item">
+              <%if(current_number === 0){%>
+                <a disabled="disabled" class="page-link" aria-label="Previous">
+                  <i style="color: #aca6a3" class="fa fa-chevron-left"></i>
+                </a>
+              <%} else {%> 
+                <a href="/cms/orders?nav=previous" class="page-link" aria-label="Previous">
+                  <i style="color: #937c6f" class="fa fa-chevron-left"></i>
+                </a>
+              <%}%>
+            </li>
+            <li class="page-item">
+              <%if(orders.length < limit){%>
+                <a disabled="disabled" class="page-link" aria-label="Previous">
+                  <i style="color: #aca6a3" class="fa fa-chevron-right"></i>
+                </a>
+              <%} else {%> 
+                <a href="/cms/orders?nav=next" class="page-link" aria-label="Next">
+                  <i style="color: #937c6f" class="fa fa-chevron-right"></i>
+                </a>
+              <%}%>
+            </li>
+          </ul>
+        </nav>
         <!-- ============================================================== -->
         <!-- End Info box -->
         <!-- chart box two -->
@@ -134,6 +162,7 @@
     </div>
   </div>
 </div>
+
 <!-- ============================================================== -->
 <!-- End Wrapper -->
 <!-- ============================================================== -->
