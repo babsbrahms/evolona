@@ -23,8 +23,10 @@
   <% include ./partials/head %>
   
   
-    <h1>Proccessing...</h1>
-    <div id="alert" class="alert alert-danger col text-center mt-5"></div>
+    
+    <div id="alert" class="alert alert-danger col text-center mt-5">
+        <h1>Proccessing...</h1>
+    </div>
 	<!-- Footer -->
     <input type="hidden" id="cart" value="<%=JSON.stringify(cart)%>">
     <input type="hidden" id="txref" value="<%=txref%>">
@@ -62,6 +64,13 @@
         var txref = document.getElementById('txref').value;
         var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         
+        var userObj = {
+            first, last, 
+            email, 
+            country, state, city , address, phone, amount, shipping
+        }
+
+        console.log(userObj);
 		if (first && last && email && country && state && city && address && phone) {
               
                 alert.classList.remove('alert-danger');

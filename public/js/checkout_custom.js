@@ -178,7 +178,7 @@ $(document).ready(function()
 			// set value in localstorage
 			var userObj = {
 				first, last, 
-				//email, 
+				email, 
 				country, state, city , address, phone, amount, shipping
 			}
 
@@ -227,7 +227,7 @@ $(document).ready(function()
                             customer_phone: phone,
                             currency: "USD",
 							txref: ref,
-							redirect_url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`,
+							redirect_url: `/checkout/confirmation/${ref}`,
                             meta: [{
                                 metaname: "flightID",
                                 metavalue: "AP1234"
