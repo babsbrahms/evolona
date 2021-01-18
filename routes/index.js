@@ -174,7 +174,7 @@ router.post("/forgot_password",
                   res.locals.error = req.app.get('env') === 'development' ? err : {};
                   res.render('error', { page: ' | CMS', message: 'Problem adding product'})
               } else {
-                  ResetPassword(req, res, text)           
+                  ResetPassword(req, res, text, email)           
               }
           })
       }

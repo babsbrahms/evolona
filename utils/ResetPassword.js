@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer')
 
-function ResetPassword (req, res, token) {
+function ResetPassword (req, res, token, to) {
 
     let transporter = nodemailer.createTransport({
       host: 'smtp-relay.sendinblue.com',
@@ -21,7 +21,7 @@ function ResetPassword (req, res, token) {
         <h1 style="text-align: center;font-weight:bolder; font-size: 50px">Evolona</h1>
         <br>
         <h1 style="text-align: center;font-weight:400;">Use the token below to reset our password</h1>
-        <h1 style="text-align: center; font-weight: normal; font-size: 18px;">${token}</h1>
+        <h1 style="text-align: center; font-weight: normal; font-size: 18px; background-color: f8c46f;">${token}</h1>
         <br>
 
         <br/>
@@ -63,12 +63,14 @@ function ResetPassword (req, res, token) {
       // send mail with defined transport object
      transporter.sendMail(mailOptions, (error, info) => {
        if (error) {
-         var ms = req.app.get('env') === 'development' ? error.message : 'Your order has been recieved. Your order will be delivered within 1 - 2 business day. Thank you for shopping at Evolona.'
-            res.status(401).send({ msg: ms , success: false })
+          // var ms = req.app.get('env') === 'development' ? error.message : 'Your order has been recieved. Your order will be delivered within 1 - 2 business day. Thank you for shopping at Evolona.'
+          //   res.status(401).send({ msg: ms , success: false })
+            req.flash('errors', [{ msg: error.message }] )
+            res.redirect('/forgot_password'); 
        }else{
             console.log('Message sent: %s', info.messageId);
             req.flash('msg', 'Please check your email for reset password token!')
-            res.redirect('/login');          
+            res.redirect('/reset_password');          
        }
      });
 }
