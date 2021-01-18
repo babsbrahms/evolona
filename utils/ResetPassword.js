@@ -55,8 +55,7 @@ function ResetPassword (req, res, token) {
     let mailOptions = {
         from: `"Evolona" <${process.env.email}>`, // sender address
         to: `${to}`, // list of receivers
-        subject: 'Notification of your order', // Subject line
-        text: 'Hello world?', // plain text body
+        subject: 'Reset Password', // Subject line
         html: mail // html body
     };
     

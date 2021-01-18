@@ -58,11 +58,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
             <td>
                 <div style="flex: 1; padding-left: 5px">      
      
-                    <p style="text-align: center">Orders made on or before Thursday will be delivered this Saturday</p>
-
-                    <p style="text-align: center">Orders made after Thursday will be delivered next Saturday</p>
-
-                    <p style="text-align: center">You will be contacted on Friday on how to get your order</p>
+                    <p style="text-align: center">Orders are delivered between 1 - 2 business days.</p>
                 </div>
             </td>
         </tr>
@@ -145,7 +141,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
     let mailOptions = {
         from: `"Evolona" <${process.env.email}>`, // sender address
         to: `${to}`, // list of receivers
-        subject: 'Notification of your order', // Subject line
+        subject: 'Order Confirmation', // Subject line
         text: 'Hello world?', // plain text body
         html: mail // html body
     };
