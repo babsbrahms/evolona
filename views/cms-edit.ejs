@@ -158,12 +158,12 @@
                                   <input type="number" class="form-control font-14"  name="XL" placeholder="add quantity">
                                 </div>
                               </div>
-                              <!-- <div class="col-md-6 col-xs-12">
-                                <label class="control-label font-14 m-b-5">SKU identification</label>
+                              <div class="col-md-6 col-xs-12">
+                                <label class="control-label font-14 m-b-5">REGULAR</label>
                                 <div >
-                                  <input type="text" class="form-control font-14"  placeholder="SKU">
+                                  <input type="number" class="form-control font-14" name="REGULAR"  placeholder="add quantity">
                                 </div>
-                              </div> -->
+                              </div>
                             </div>
                           </div>
                           <div class="clearfix"></div>
@@ -373,6 +373,7 @@
       var M = form["M"].value;
       var L = form["L"].value;
       var XL = form["XL"].value;
+      var REGULAR = form["REGULAR"].value;
       var tags = form["tags"].value;
       var price = form["price"].value;
       var description = form["description"].value;
@@ -380,8 +381,15 @@
       var _id = form['_id'].value;
       var OldPics = form['OldPics'].value;
 
-      console.log( {name, S, M, L, XL, tags, description, price, _id, OldPics });
+      console.log( {name, S, M, L, XL, REGULAR, tags, description, price, _id, OldPics });
      // console.log(pictures.files);
+
+        if (REGULAR) {
+          S = 0;
+          M = 0;
+          L = 0;
+          XL = 0;
+        }
 
 
           if (pictures.files.length === 0) {
@@ -424,7 +432,7 @@
               }
 
               xhr.send(JSON.stringify({
-                name, S, M, L, XL, tags, description, price, _id, OldPics,
+                name, S, M, L, XL, REGULAR, tags, description, price, _id, OldPics,
                 imgs: url
               }))
           }

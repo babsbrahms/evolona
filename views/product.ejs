@@ -62,38 +62,67 @@
 
 						<!-- Product Size -->
 						<div class="product_size_container">
-							<span>Size</span>
-							<div class="product_size">
-								<ul id="size_ul" class="d-flex flex-row align-items-start justify-content-start">
-									<%product.sizes.forEach(function(size, index) {%>
-										<%if(size.qty > 0){%>
-										<li>
-											<input type="radio" value="<%=size.size%>" id="radio_<%=(index+ 1)%>" name="product_radio" class="regular_radio radio_<%=(index+ 1)%>">
-											<label for="radio_<%=(index+ 1)%>"><%=size.size%></label>
-										</li>
-										<%}%>
-									<%})%>
-								</ul>
-							</div>
+							<%if ((product.sizes.length > 0) && (product.sizes[0].size === "REGULAR")) {%> 
+								<div class="product_size">
+									<ul id="size_ul" data-sizes="<%=JSON.stringify(product.sizes)%>" class="d-flex flex-row align-items-start justify-content-start">
+									</ul>
+								</div>
+							<%} else {%> 
+								<span>Size</span>
+								<div class="product_size">
+									<ul id="size_ul" data-sizes="<%=JSON.stringify(product.sizes)%>" class="d-flex flex-row align-items-start justify-content-start">
+										<%product.sizes.forEach(function(size, index) {%>
+											<%if(size.qty > 0){%>
+											<li>
+												<input type="radio" value="<%=size.size%>" id="radio_<%=(index+ 1)%>" name="product_radio" class="regular_radio radio_<%=(index+ 1)%>">
+												<label for="radio_<%=(index+ 1)%>"><%=size.size%></label>
+											</li>
+											<%}%>
+										<%})%>
+									</ul>
+								</div>
+							<%}%>
+
+
 							<!-- In Stock -->
-							<div class="in_stock_container">
-								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<%product.sizes.forEach(function(size, index) {%>
-										<%if(size.qty <= 0){%>
-										<li>
-											<label style="color: red;">Size <%=size.size%> is out of stock </label>
-											<br>
-										</li>
-										<%}%>
-									<%})%>
-								</ul>
-							</div>
+							<%if ((product.sizes.length > 0) && (product.sizes[0].size === "REGULAR")) {%> 
+								<div class="in_stock_container">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<%product.sizes.forEach(function(size, index) {%>
+											<%if(size.qty <= 0){%>
+											<li>
+												<label style="color: red;"> Out of stock </label>
+												<br>
+											</li>
+											<%}%>
+										<%})%>
+									</ul>
+								</div>
+							<%} else {%> 
+								<div class="in_stock_container">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<%product.sizes.forEach(function(size, index) {%>
+											<%if(size.qty <= 0){%>
+											<li>
+												<label style="color: red;">Size <%=size.size%> is out of stock </label>
+												<br>
+											</li>
+											<%}%>
+										<%})%>
+									</ul>
+								</div>
+							<%}%>
+
 
 							<div id="alert" class="alert alert-danger col-lg-5 col-md-6 text-center">
 								add your size
 							</div>
 							<input type="hidden" name="id" id="product_id" data-imgs="<%=JSON.stringify(product.pictures)%>" data-price="<%=product.price%>" data-name="<%=product.name%>" value="<%=product.id%>">
-							<div class="button cart_button"><a href="javascript:void(0)">add to cart</a></div>
+							<%if ((product.sizes.length === 0)) {%> 
+								<label style="color: red;">Product is out of stock </label>
+							<%} else {%> 
+								<div class="button cart_button"><a href="javascript:void(0)">add to cart</a></div>
+							<%}%>
 						</div>	
 
 						<br><br>

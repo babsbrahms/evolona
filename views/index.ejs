@@ -75,13 +75,23 @@
 										
 								</div>
 
-								<select name="select" style="color:white; padding: 7px" class="product_options product_buy select" id="select">
-									<%product.sizes.forEach(function(size) {%>
-										<%if(size.qty > 0){%>
-										<option data-size="<%=size.size%>" class="cart_option" value="<%=size.size%>"><%=size.size%></option>
-										<%}%>
-									<%})%>
-								</select>
+								<%if (((product.sizes.length > 0) && (product.sizes[0].size === "REGULAR")) || (product.sizes.length === 0) ) {%> 
+									<select name="select" style="color:white; padding: 7px; display: none;" class="product_options product_buy select" id="select">
+										<%product.sizes.forEach(function(size) {%>
+											<%if((size.qty > 0)){%>
+											<option data-size="<%=size.size%>" class="cart_option" value="<%=size.size%>"><%=size.size%></option>
+											<%}%>
+										<%})%>
+									</select>
+								<%} else {%> 
+									<select name="select" style="color:white; padding: 7px" class="product_options product_buy select" id="select">
+										<%product.sizes.forEach(function(size) {%>
+											<%if((size.qty > 0)){%>
+											<option data-size="<%=size.size%>" class="cart_option" value="<%=size.size%>"><%=size.size%></option>
+											<%}%>
+										<%})%>
+									</select>
+								<%}%>
 							
 							</div>
 							

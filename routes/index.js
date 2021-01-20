@@ -33,6 +33,7 @@ router.get('/', function(req, res, next) {
         req.session.blog_number = count;
         res.redirect('/')
       } else {
+        console.log(clothings[0].sizes);
         res.render('index', { page: '', clothings, current_number: current, limit });
       }
   })

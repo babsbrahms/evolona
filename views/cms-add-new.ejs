@@ -162,12 +162,12 @@
                                     placeholder="add quantity">
                                 </div>
                               </div>
-                              <!-- <div class="col-md-6 col-xs-12">
-                                <label class="control-label font-14 m-b-5">SKU identification</label>
+                              <div class="col-md-6 col-xs-12">
+                                <label class="control-label font-14 m-b-5">REGULAR</label>
                                 <div >
-                                  <input type="text" class="form-control font-14"  placeholder="SKU">
+                                  <input type="number" class="form-control font-14" name="REGULAR"  placeholder="add REGULAR quantity">
                                 </div>
-                              </div> -->
+                              </div>
                             </div>
                           </div>
                           <div class="clearfix"></div>
@@ -360,10 +360,18 @@
       var M = form["M"].value;
       var L = form["L"].value;
       var XL = form["XL"].value;
+      var REGULAR = form["REGULAR"].value;
       var tags = form["tags"].value;
       var price = form["price"].value;
       var description = form["description"].value;
       var pictures = form["pictures"];
+
+      if (REGULAR) {
+        S = 0;
+        M = 0;
+        L = 0;
+        XL = 0;
+      }
 
       var uploads = Array.from(pictures.files).map((item, index) => uploadImage(item, index))
 
@@ -400,7 +408,7 @@
         }
 
         xhr.send(JSON.stringify({
-          name, S, M, L, XL, tags, description, price,
+          name, S, M, L, XL, REGULAR, tags, description, price,
           imgs: url
         }))
       }

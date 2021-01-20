@@ -104,7 +104,7 @@
 									</li>
 									<%cart.products.forEach(function(product) {%>
 										<li class="d-flex flex-row align-items-center justify-content-start">
-											<div class="cart_total_title"><%=product.name%> | <%=product.size%> x <%=product.qty%></div>
+											<div class="cart_total_title"><%=product.name%> <%if (product.size !== "REGULAR") {%>| <%=product.size%> <%}%> x <%=product.qty%></div>
 											<div class="cart_total_price ml-auto">$ <%=(product.price)*(product.qty)%></div>
 										</li>
 									<%})%>

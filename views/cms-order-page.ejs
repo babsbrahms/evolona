@@ -111,7 +111,7 @@
                               <td><%=cart.id%></td>
                               <td><img src="<%=cart.product.pictures[0]%>" alt="" title=""> </td>
 							                <td class="text-dark weight-600">
-							                  <%=cart.name%> | <%=cart.size%>
+							                  <%=cart.name%> <%if (cart.size !== "REGULAR") {%>| <%=cart.size%> <%}%>
                               </td>
                               <td>USD <%=cart.price%></td>
                               <td><%=cart.qty%></td>

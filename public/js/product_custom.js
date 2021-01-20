@@ -30,7 +30,8 @@ $(document).ready(function()
 	var cart_button = document.querySelector('.cart_button')
 	var size = undefined;
 	var alert = document.getElementById('alert');
-
+	var p_sizes = document.getElementById('size_ul').getAttribute("data-sizes");
+	var product_sizes = JSON.parse(p_sizes)
 	setHeader();
 
 	$(window).on('resize', function()
@@ -178,8 +179,13 @@ $(document).ready(function()
 
 	// alert no-show
 	alert.style.display = 'none';
-
 	
+	
+	// add default size for regular
+	if ((product_sizes.length > 0) && (product_sizes[0].size === "REGULAR")) {
+		size = "REGULAR"
+	}
+
 	// when size is changed
 	document.getElementById('size_ul').addEventListener('click', function(e) {
 		size = e.target.value;

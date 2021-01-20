@@ -149,9 +149,9 @@ router.get('/add-new', function(req, res){
 
 // post add product
 router.post('/add-new', function(req, res){
-    var {name, S, M, L, XL, tags, description, price, imgs} = req.body;
+    var {name, S, M, L, XL, REGULAR, tags, description, price, imgs} = req.body;
     
-    console.log({ name, S, M, L, XL, tags, description, price, imgs });
+    console.log({ name, S, M, L, XL, REGULAR, tags, description, price, imgs });
     
 
     // var imgs = pictures.map((pics) => `/cms/images/${pics.filename}`)
@@ -159,21 +159,27 @@ router.post('/add-new', function(req, res){
     // console.log(imgs);
     
     var sizes = []
-    if (Number(S) > 0) {
-        sizes.push({ size: 'S', qty: Number(S)})
+
+    if (Number(REGULAR) > 0) {
+        sizes.push({ size: "REGULAR", qty: Number(REGULAR) })
+    } else {
+        if (Number(S) > 0) {
+            sizes.push({ size: 'S', qty: Number(S)})
+        }
+
+        if (Number(M) > 0) {
+            sizes.push({ size: 'M', qty: Number(M)})
+        }
+
+        if (Number(L) > 0) {
+            sizes.push({ size: 'L', qty: Number(L)})
+        }
+
+        if (Number(XL) > 0) {
+            sizes.push({ size: 'XL', qty: Number(XL)})
+        }
     }
 
-    if (Number(M) > 0) {
-        sizes.push({ size: 'M', qty: Number(M)})
-    }
-
-    if (Number(L) > 0) {
-        sizes.push({ size: 'L', qty: Number(L)})
-    }
-
-    if (Number(XL) > 0) {
-        sizes.push({ size: 'XL', qty: Number(XL)})
-    }
 
     Product.create({ 
         name,
@@ -217,7 +223,7 @@ router.get('/edit/:id', function(req, res){
 
 // submit edit
 router.post('/edit', function(req, res){
-    var {name, S, M, L, XL, tags, description, price, _id, OldPics, imgs } = req.body;
+    var {name, S, M, L, XL, REGULAR, tags, description, price, _id, OldPics, imgs } = req.body;
   //  var pictures = req.files;
 
    // var imgs = pictures.map((pics) => `/cms/images/${pics.filename}`)
@@ -225,21 +231,27 @@ router.post('/edit', function(req, res){
     
     
     var sizes = []
-    if (Number(S) > 0) {
-        sizes.push({ size: 'S', qty: Number(S)})
+
+    if (Number(REGULAR) > 0) {
+        sizes.push({ size: "REGULAR", qty: Number(REGULAR) })
+    } else {
+        if (Number(S) > 0) {
+            sizes.push({ size: 'S', qty: Number(S)})
+        }
+
+        if (Number(M) > 0) {
+            sizes.push({ size: 'M', qty: Number(M)})
+        }
+
+        if (Number(L) > 0) {
+            sizes.push({ size: 'L', qty: Number(L)})
+        }
+
+        if (Number(XL) > 0) {
+            sizes.push({ size: 'XL', qty: Number(XL)})
+        }
     }
 
-    if (Number(M) > 0) {
-        sizes.push({ size: 'M', qty: Number(M)})
-    }
-
-    if (Number(L) > 0) {
-        sizes.push({ size: 'L', qty: Number(L)})
-    }
-
-    if (Number(XL) > 0) {
-        sizes.push({ size: 'XL', qty: Number(XL)})
-    }
 
     Product.updateOne({ _id }, { 
         name,
