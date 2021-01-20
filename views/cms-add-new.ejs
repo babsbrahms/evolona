@@ -182,6 +182,23 @@
                               </div>
                             </div>
                           </div>
+
+                          <div class="form-group m-b-15">
+                            <div class="row m-0 m-b-20">
+                              <div class="col-md-6 col-xs-12">
+                                <label class="control-label font-14 m-b-5">Type</label>
+                                <div>
+                                  <select class="form-control font-14 m-b-5" name="type" value="shoes"  placeholder="Add product type" required>
+                                    <option value="shoes">Shoe</option>
+                                    <option value="bags">Bag</option>
+                                    <option value="clothes">Clothes</option>
+                                    <option value="watches">Watches</option>
+                                    <option value="others">Others</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="clearfix"></div>
                           <div class="form-group m-b-15">
                             <div class="col-sm-12">
@@ -363,6 +380,7 @@
       var REGULAR = form["REGULAR"].value;
       var tags = form["tags"].value;
       var price = form["price"].value;
+      var type = form["type"].value;
       var description = form["description"].value;
       var pictures = form["pictures"];
 
@@ -408,7 +426,7 @@
         }
 
         xhr.send(JSON.stringify({
-          name, S, M, L, XL, REGULAR, tags, description, price,
+          name, S, M, L, XL, REGULAR, tags, description, price, type,
           imgs: url
         }))
       }

@@ -149,7 +149,7 @@ router.get('/add-new', function(req, res){
 
 // post add product
 router.post('/add-new', function(req, res){
-    var {name, S, M, L, XL, REGULAR, tags, description, price, imgs} = req.body;
+    var {name, S, M, L, XL, REGULAR, tags, description, price, type, imgs} = req.body;
     
     console.log({ name, S, M, L, XL, REGULAR, tags, description, price, imgs });
     
@@ -187,6 +187,7 @@ router.post('/add-new', function(req, res){
         tags: tags.split(','),
         description,
         price,
+        type,
         pictures: imgs
 
     })
@@ -223,7 +224,7 @@ router.get('/edit/:id', function(req, res){
 
 // submit edit
 router.post('/edit', function(req, res){
-    var {name, S, M, L, XL, REGULAR, tags, description, price, _id, OldPics, imgs } = req.body;
+    var {name, S, M, L, XL, REGULAR, tags, description, price, type, _id, OldPics, imgs } = req.body;
   //  var pictures = req.files;
 
    // var imgs = pictures.map((pics) => `/cms/images/${pics.filename}`)
@@ -259,6 +260,7 @@ router.post('/edit', function(req, res){
         tags: tags.split(','),
         description,
         price,
+        type,
         pictures: imgs.length > 0? imgs: OldPics.split(",")
 
     }, function(err) {

@@ -1496,3 +1496,15 @@ section
 	font-size: 12px;
 	color: #232323;
 }
+
+.evo_type {
+	padding: 5px;
+	font-size: 36;
+	color: #ca8826;
+}
+
+.evo_active {
+	font-weight: bolder;
+	border-bottom: 3px solid #ee9a1b;
+
+}

@@ -303,4 +303,23 @@ $(document).ready(function()
 			
 		}
 	});
+
+
+	// add type
+	let url = window.location.pathname;
+	let type = document.getElementById("type");
+
+	if (url === "/") {
+		type.children[0].setAttribute("class", "evo_type evo_active")
+	} else if (url === "/type/shoes") {
+		type.children[1].setAttribute("class", "evo_type evo_active")
+	} else if (url === "/type/bags") {
+		type.children[2].setAttribute("class", "evo_type evo_active")
+	} else if (url === "/type/clothes") {
+		type.children[3].setAttribute("class", "evo_type evo_active")
+	} else if (url === "/type/watches") {
+		type.children[4].setAttribute("class", "evo_type evo_active")
+	} else if (url === "/type/others") {
+		type.children[5].setAttribute("class", "evo_type evo_active")
+	}
 });

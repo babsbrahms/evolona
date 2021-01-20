@@ -118,7 +118,7 @@ function Mailer (YourOrder, shipping, totaPrice, to, transactionRef, req, res, n
     <br>
     <div style="text-align:center;">
         <p>
-            PLOT 143, NABBINGO, NSANGI, BUSIRO, WAKISO DISTRICT. UGANDA.
+            NABBINGO, NSANGI, BUSIRO, WAKISO DISTRICT. UGANDA.
         </p>
     </div>
     <br>

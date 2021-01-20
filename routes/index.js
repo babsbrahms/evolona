@@ -9,7 +9,7 @@ var Order = require("../model/order")
 var Product = require("../model/product");
 const ResetPassword = require('../utils/ResetPassword');
 
-
+//HOME
 router.get('/', function(req, res, next) {
   
   const {nav} = req.query;
@@ -33,7 +33,38 @@ router.get('/', function(req, res, next) {
         req.session.blog_number = count;
         res.redirect('/')
       } else {
-        console.log(clothings[0].sizes);
+        res.render('index', { page: '', clothings, current_number: current, limit });
+      }
+  })
+});
+
+
+// TYPE
+router.get('/type/:name', function(req, res, next) {
+
+  let type = req.params.name
+  
+  const {nav} = req.query;
+  let current = req.session.blog_number || 0;
+  if (nav === 'previous' && (current !== 0) ) {
+    current = current - 1;
+  } else if (nav === 'next') {
+    current = current + 1;
+  } 
+
+  req.session.blog_number = current;
+  let limit = 10;
+  let skip = limit*current;
+  Product.find({ type }).sort({ _id: -1 }).skip(skip).limit(limit).exec(function (err, clothings) {
+      if (err) {
+        res.locals.error = req.app.get('env') === 'development' ? err||errs : {};
+
+        res.render('/', { page: '', message: err.message});
+      } else if ((clothings.length === 0) && (current !== 0)) {
+        let count = (current > 0)? current - 1 : 0
+        req.session.blog_number = count;
+        res.redirect('/')
+      } else {
         res.render('index', { page: '', clothings, current_number: current, limit });
       }
   })
