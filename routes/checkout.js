@@ -211,8 +211,11 @@ function loggedIn (req, res, next) {
       next()
 
   } else {
-      req.flash('errors', "Login is required")
-      res.redirect('/login');
+        //     console.log("path: ", req.path);
+        // console.log("URL: ", req.originalUrl)
+    req.session.login_redirect = req.originalUrl
+    req.flash('errors', [{ msg: "Login is required" }] )
+    res.redirect('/login');
   }
 }
 

@@ -134,7 +134,7 @@ router.post('/signup',
 // route for user Login
 router.get('/login', (req, res) => {
   if (req.session.user) {
-    req.flash('msg', 'You are already logged in')
+    // req.flash('msg', 'You are already logged in')
     res.redirect('/account')
   } else {
     res.render('login', { page: '| Login', msg: req.flash('msg'), errors: req.flash('errors')})
@@ -165,9 +165,14 @@ router.post('/login',
     } else {
         console.log('USER:', user);
         console.log('VALUE: ', user.dataValues);
-        req.flash('msg', 'Login successfull')
+        // req.flash('msg', 'Login successfull')
         req.session.user = user;
-        res.redirect('/account');
+        if (req.session.login_redirect) {
+          res.redirect(req.session.login_redirect)
+        } else {
+          res.redirect('/account');
+        }
+        
     }
   });
 })
@@ -336,7 +341,10 @@ function loggedIn (req, res, next) {
         next()
 
     } else {
-        // req.flash('errors', "Login is required")
+        // console.log("path: ", req.path);
+        // console.log("URL: ", req.originalUrl)
+        req.session.login_redirect = req.originalUrl
+        req.flash('errors', [{ msg: "Login is required" }] )
         res.redirect('/login');
     }
 }
