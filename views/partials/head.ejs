@@ -214,7 +214,13 @@
 							// a.setAttribute('href', `/product?id:${result.id}`)
 							// a.innerHTML = result.name;
 							// search_result.appendChild(li)
-							list += `<li class="list-group-item list-group-item-action"> <a href="/product?id=${result._id}">${result.name}</a></li>`
+							list += `<li class="list-group-item list-group-item-action">  
+								
+								<a href="/product?id=${result._id}">
+								<img width="60px" src=${result.pictures[0]} alt="">
+								<span>${result.name}</span>
+								</a>
+							</li>`
 						});
 						search_result.innerHTML = list
 						}
