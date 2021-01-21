@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
   } 
 
   req.session.blog_number = current;
-  let limit = 10;
+  let limit = 12;
   let skip = limit*current;
   Product.find({}).sort({ _id: -1 }).skip(skip).limit(limit).exec(function (err, clothings) {
       if (err) {
@@ -53,7 +53,7 @@ router.get('/type/:name', function(req, res, next) {
   } 
 
   req.session.blog_number = current;
-  let limit = 10;
+  let limit = 12;
   let skip = limit*current;
   Product.find({ type }).sort({ _id: -1 }).skip(skip).limit(limit).exec(function (err, clothings) {
       if (err) {
@@ -297,7 +297,7 @@ router.get('/account', function(req, res, next) {
     } 
   
     req.session.cms_number = current;
-    let limit = 10;
+    let limit = 12;
     let skip = limit*current;
 
     Order.find({ email: user.email }).sort({ createdAt: -1 }).skip(skip).limit(limit).exec(function (err, orders) {
