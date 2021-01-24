@@ -137,9 +137,9 @@ $(document).ready(function()
 	
 	// payment
 	// live key
-	// const API_publicKey = "FLWPUBK-748ced89d0a7bacb39f42abed5f452e8-X";
+	const API_publicKey = "FLWPUBK-748ced89d0a7bacb39f42abed5f452e8-X";
 	// test key
-	const API_publicKey = 'FLWPUBK_TEST-b1517ebc9f27980773d303e99c754d23-X'
+	// const API_publicKey = 'FLWPUBK_TEST-b1517ebc9f27980773d303e99c754d23-X'
 	var ref = "MX-"+Date.now()+Math.ceil(Math.random()*100000);
 	
 	document.getElementById('payWithRave').onclick = payWithRave;

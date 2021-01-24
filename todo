@@ -1,20 +1,24 @@
 [x]create favicon
 [x]change firebase account
-[] heroku account
+[x] heroku account
 [x] flutterwave
 [x] mongodb online
 
 ///deploy
-[] change to live keys in checkout_custom
-[] change to live script in checkout.ejs
-[] redirect url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`
-[] Account, logout and login icon
-[] forgot password
+[x] change to live keys in checkout_custom
+[x] change to live script in checkout.ejs
+[x] redirect url: `http://www.evolonacompanyltd.com/checkout/confirmation/${ref}`
+[x] Account, logout and login icon
+[x] forgot password
 [x] pagginate cms product
 [x] paginate cms order
 [x] add currency in order
 [x] Email Account
-[]
+
+[x] logo + evolona
+[x] payment logo
+[] heroku ssh + domain
+[] 
 
 
 shipping cost

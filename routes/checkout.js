@@ -175,10 +175,10 @@ router.post('/order', (req, res) => {
  
                             YourOrder += ` 
                             <tr>
-                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">${prod.name}</td>
-                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">${prod.size}</td>
-                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">${prod.qty} unit</td>
-                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:rgb(229, 243, 166); border-collapse: collapse;">USD ${prod.price * prod.qty}</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.name}</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.size}</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.qty} unit</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">USD ${prod.price * prod.qty}</td>
                             </tr>
                               `
                         });
