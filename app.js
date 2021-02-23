@@ -9,6 +9,7 @@ var cors = require('cors')
 var MemoryStore = require('memorystore')(session)
 const MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
+var enforce = require('express-sslify');
 require('dotenv').config();
 
 
