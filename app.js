@@ -46,6 +46,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
 // app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret:"they_are_here",
