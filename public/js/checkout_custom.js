@@ -141,6 +141,7 @@ $(document).ready(function()
 	// test key
 	// const API_publicKey = 'FLWPUBK_TEST-b1517ebc9f27980773d303e99c754d23-X'
 	var ref = "MX-"+Date.now()+Math.ceil(Math.random()*100000);
+
 	
 	document.getElementById('payWithRave').onclick = payWithRave;
 
@@ -192,9 +193,22 @@ $(document).ready(function()
 				credentials: 'include',
 				// credentials: 'same-origin', // <-- includes cookies in the request
 				headers: {
+					'Content-Type': 'application/json',
 					'CSRF-Token': token // <-- is the csrf token as a header
-				  },
-				method: 'GET'
+				},
+				method: 'POST',
+				body: JSON.stringify({
+					first, 
+					last, 
+					email, 
+					country, 
+					state, 
+					city , 
+					address, 
+					phone, 
+					amount,
+					ref
+				}),
 			})
             .then((r) => r.json())
 			.then((res) =>{
@@ -217,80 +231,83 @@ $(document).ready(function()
 						window.alert('Your cart is updated due to the remaining quantity in stock. Please re-check your cart before you proceed.') 
 					} else {
 						
-                        // make payment
-                        var x = getpaidSetup({
-                            PBFPubKey: API_publicKey,
-							customer_email: email,
-							customer_firstname: first,
-							customer_lastname: last,
-                            amount: amount,
-                            customer_phone: phone,
-                            currency: "USD",
-							txref: ref,
-							redirect_url: `/checkout/confirmation/${ref}`,
-                            meta: [{
-                                metaname: "flightID",
-                                metavalue: "AP1234"
-                            }],
-                            onclose: function() {},
-                            callback: function(response) {
-                                var txref = response.tx.txRef; // collect txRef returned and pass to server page to complete status check.
+						// paymentURI = res.paymentURI;
 
-                                if (
-                                    response.tx.chargeResponseCode == "00" ||
-                                    response.tx.chargeResponseCode == "0"
-                                ) {
-									e.target.style.display = 'none'
-									alert.style.display = 'block';
-									alert.classList.remove('alert-danger');
-									alert.classList.add('alert-success');
-									alert.innerHTML = 'Verify your payment and saving your order. Please wait...';
-                                    // redirect to a success page
-                                    fetch('/checkout/order', {
-										credentials: 'include',
-										// credentials: 'same-origin', // <-- includes cookies in the request
-										headers: {
-										  'CSRF-Token': token, // <-- is the csrf token as a header
-										  "Content-Type": 'application/json'
-										},
-                                        method: 'POST',
-                                        body: JSON.stringify({
-                                            txref,
-                                            name: `${first} ${last}`,
-                                            email,
-                                            address,
-											state,
-											city,
-											country,
-											phone,
-											shipping,
-											cart: JSON.parse(cart)
-                                        })
-									})
-									.then((res) => res.json())
-                                    .then((dt) =>{
-									//	window.location.reload()
-										alert.style.display = 'block';
-										alert.classList.remove('alert-danger');
-										alert.classList.add('alert-success');
-										alert.innerHTML = dt.msg;
-									})
-                                    .catch((err) =>{
-										alert.style.display = 'block';
-										alert.classList.remove('alert-success');
-										alert.classList.add('alert-dander');
-										alert.innerHTML = err.msg
-									})
-                                } else {
-                                    // redirect to a failure page.
-                                    alert.style.display = 'block';
-                                    alert.innerHTML = response.message
+						window.open(res.paymentURI)
+                        // // make payment
+                        // var x = getpaidSetup({
+                        //     PBFPubKey: API_publicKey,
+						// 	customer_email: email,
+						// 	customer_firstname: first,
+						// 	customer_lastname: last,
+                        //     amount: amount,
+                        //     customer_phone: phone,
+                        //     currency: "USD",
+						// 	txref: ref,
+						// 	redirect_url: `/checkout/confirmation/${ref}`,
+                        //     meta: [{
+                        //         metaname: "flightID",
+                        //         metavalue: "AP1234"
+                        //     }],
+                        //     onclose: function() {},
+                        //     callback: function(response) {
+                        //         var txref = response.tx.txRef; // collect txRef returned and pass to server page to complete status check.
+
+                        //         if (
+                        //             response.tx.chargeResponseCode == "00" ||
+                        //             response.tx.chargeResponseCode == "0"
+                        //         ) {
+						// 			e.target.style.display = 'none'
+						// 			alert.style.display = 'block';
+						// 			alert.classList.remove('alert-danger');
+						// 			alert.classList.add('alert-success');
+						// 			alert.innerHTML = 'Verify your payment and saving your order. Please wait...';
+                        //             // redirect to a success page
+                        //             fetch('/checkout/order', {
+						// 				credentials: 'include',
+						// 				// credentials: 'same-origin', // <-- includes cookies in the request
+						// 				headers: {
+						// 				  'CSRF-Token': token, // <-- is the csrf token as a header
+						// 				  "Content-Type": 'application/json'
+						// 				},
+                        //                 method: 'POST',
+                        //                 body: JSON.stringify({
+                        //                     txref,
+                        //                     name: `${first} ${last}`,
+                        //                     email,
+                        //                     address,
+						// 					state,
+						// 					city,
+						// 					country,
+						// 					phone,
+						// 					shipping,
+						// 					cart: JSON.parse(cart)
+                        //                 })
+						// 			})
+						// 			.then((res) => res.json())
+                        //             .then((dt) =>{
+						// 			//	window.location.reload()
+						// 				alert.style.display = 'block';
+						// 				alert.classList.remove('alert-danger');
+						// 				alert.classList.add('alert-success');
+						// 				alert.innerHTML = dt.msg;
+						// 			})
+                        //             .catch((err) =>{
+						// 				alert.style.display = 'block';
+						// 				alert.classList.remove('alert-success');
+						// 				alert.classList.add('alert-dander');
+						// 				alert.innerHTML = err.msg
+						// 			})
+                        //         } else {
+                        //             // redirect to a failure page.
+                        //             alert.style.display = 'block';
+                        //             alert.innerHTML = response.message
                                 
-                                }
+                        //         }
 
-                                x.close(); // use this to close the modal immediately after payment.
-                            }
-                        });
+                        //         x.close(); // use this to close the modal immediately after payment.
+                        //     }
+                        // });
 					}
 				}
 
