@@ -188,7 +188,7 @@ router.post('/verify', (req, res) => {
                 ref,
                 customer,
                 "Evolona Website Purchase",
-                1.20,
+                amount,
                 "USD",
                 "MERCHANT"
             );
@@ -248,59 +248,59 @@ router.post('/order', (req, res) => {
                 // console.log('Success CHARGE');
                   
                     // order
-                    // Order.create({
-                    //   cart,
-                    //   name,
-                    //   email,
-                    //   phone,
-                    //   shipping,
-                    //   totalPrice:( Number(cart.total_price) + Number(shipping)),
-                    //   transactionRef: txref,
-                    //   address: {
-                    //     address,
-                    //     city,
-                    //     state,
-                    //     country
-                    //   },
-                    //   date: new Date(),
-                    //   status: 'ordered',
+                    Order.create({
+                      cart,
+                      name,
+                      email,
+                      phone,
+                      shipping,
+                      totalPrice:( Number(cart.total_price) + Number(shipping)),
+                      transactionRef: txref,
+                      address: {
+                        address,
+                        city,
+                        state,
+                        country
+                      },
+                      date: new Date(),
+                      status: 'ordered',
                       
-                    // })
-                    // .then(() => {
-                    //     // send Mail
-                    //     var YourOrder = ''  
-                    //     var productUpdate = [];
-                    //     cart.products.forEach((prod) => {
-                    //         productUpdate.push({
-                    //           updateOne: {
-                    //             "filter" : { _id: prod.id, "sizes.size": prod.size },
-                    //             "update" : { $inc: { "sizes.$.qty": -prod.qty }}
-                    //           }
-                    //         });
+                    })
+                    .then(() => {
+                        // send Mail
+                        var YourOrder = ''  
+                        var productUpdate = [];
+                        cart.products.forEach((prod) => {
+                            productUpdate.push({
+                              updateOne: {
+                                "filter" : { _id: prod.id, "sizes.size": prod.size },
+                                "update" : { $inc: { "sizes.$.qty": -prod.qty }}
+                              }
+                            });
 
-                    //         YourOrder += ` 
-                    //         <tr>
-                    //           <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.name}</td>
-                    //           <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.size}</td>
-                    //           <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.qty} unit</td>
-                    //           <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">USD ${prod.price * prod.qty}</td>
-                    //         </tr>
-                    //           `
-                    //     });
+                            YourOrder += ` 
+                            <tr>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.name}</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.size}</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">${prod.qty} unit</td>
+                              <td style="text-align: center; padding: 7px; margin-bottom: 4px; background-color:#f7f7f7; border-collapse: collapse;">USD ${prod.price * prod.qty}</td>
+                            </tr>
+                              `
+                        });
                         
                         
-                    //     product.bulkWrite(productUpdate, function(err, writes) {
-                    //       if (err) {
-                    //         res.status(200).send({ msg: 'Your order is saved. We delivery on Saturday and Friday. Thank you for shopping at Evolona.', success: true }) 
-                    //       } else {
-                    //         //res.status(403).send({ msg: 'Your order is not saved', success: false }) 
-                    //         Mailer(YourOrder, shipping, cart.total_price, email, txref, req, res, name, address, state, country, city)
-                    //       }
+                        product.bulkWrite(productUpdate, function(err, writes) {
+                          if (err) {
+                            res.status(200).send({ msg: 'Your order is saved. We delivery on Saturday and Friday. Thank you for shopping at Evolona.', success: true }) 
+                          } else {
+                            //res.status(403).send({ msg: 'Your order is not saved', success: false }) 
+                            Mailer(YourOrder, shipping, cart.total_price, email, txref, req, res, name, address, state, country, city)
+                          }
                           
-                    //     });
-                    // }).catch(() => {
-                    //   res.status(400).send({ msg: `Unable to save your order. please send us a picture of your order using the provided email address or phone number. Also add provide your transaction reference number: ${txref}. Thank you for shoppng at Evolona.`, success: false })
-                    // })
+                        });
+                    }).catch(() => {
+                      res.status(400).send({ msg: `Unable to save your order. please send us a picture of your order using the provided email address or phone number. Also add provide your transaction reference number: ${txref}. Thank you for shoppng at Evolona.`, success: false })
+                    })
                 
           // }else{
           //   res.status(404).send({ msg: 'Problem verifing your payment. contact us using information at the bottom of the page.'})
