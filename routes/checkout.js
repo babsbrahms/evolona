@@ -8,8 +8,8 @@ var Mailer = require('../utils/Mailer')
 var unirest = require('unirest')
 
 var PesaPal = require('pesapaljs').init({
-  key: "BklkhHlqMXqA7QZf2b9mkZViA/hKPhBa",
-  secret: "u221ezUpDYQQkmzVcnfHJU+qJrs=",
+  key: process.env.pesalpal_consumer_key,
+  secret: process.env.pesalpal_consumer_secret,
   debug: false // false in production!
 });
 
