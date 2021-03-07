@@ -193,7 +193,7 @@ router.post('/verify', (req, res) => {
                 "MERCHANT"
             );
                 
-            var paymentURI = PesaPal.getPaymentURL(order, `evolonacompanyltd.com/checkout/confirmation/${ref}`);
+            var paymentURI = PesaPal.getPaymentURL(order, `https://evolonacompanyltd.com/checkout/confirmation/${ref}`);
             // res.redirect(paymentURI);
 
             console.log(paymentURI);
