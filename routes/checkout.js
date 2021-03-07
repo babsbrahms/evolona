@@ -240,7 +240,7 @@ router.post('/order', (req, res) => {
       // check status is success.
         PesaPal.getPaymentStatus({ reference: txref })
         .then((status) => { 
-          res.send(status)
+          // res.send(status)
           // if (response.body.data.status === "successful" &&
           //     response.body.data.chargecode === "00" &&
           //     response.body.data.currency === "USD" &&
